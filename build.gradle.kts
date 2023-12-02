@@ -20,9 +20,19 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
+
+	// define a BOM and its version
+	implementation(platform("com.squareup.okhttp3:okhttp-bom:4.11.0"))
+
+	// define any required OkHttp artifacts without version
+	implementation("com.squareup.okhttp3:okhttp")
+	implementation("com.squareup.okhttp3:logging-interceptor")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

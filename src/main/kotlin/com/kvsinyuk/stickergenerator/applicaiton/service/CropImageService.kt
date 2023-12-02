@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.service
+package com.kvsinyuk.stickergenerator.applicaiton.service
 
 import org.springframework.stereotype.Service
 import java.awt.image.BufferedImage

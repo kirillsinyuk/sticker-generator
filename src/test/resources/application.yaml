@@ -1,0 +1,5 @@
+http:
+  bg-removal:
+    base-url: http://localhost:8090
+
+
