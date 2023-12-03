@@ -1,0 +1,10 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
+http:
+  bg-removal:
+    base-url: ${BG_REMOVAL_BASE_URL}
+

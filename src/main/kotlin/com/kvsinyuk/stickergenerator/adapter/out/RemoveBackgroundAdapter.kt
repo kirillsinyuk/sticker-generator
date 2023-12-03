@@ -1,0 +1,46 @@
+package com.kvsinyuk.stickergenerator.adapter.out
+
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.RemoveBackgroundPort
+import mu.KLogging
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Component
+
+@Component
+class RemoveBackgroundAdapter(
+    private val client: OkHttpClient
+): RemoveBackgroundPort {
+
+    @Value("\${http.bg-removal.base-url}")
+    private lateinit var backgroundRemoveBaseUrl: String
+
+    override fun removeBackground(fileName: String?, image: ByteArray): ByteArray {
+        val response = callForBackgroundRemove(fileName, image)
+        return response.body?.bytes()
+            ?: run {
+                logger.error { response.message }
+                throw RuntimeException(response.message)
+            }
+    }
+
+    private fun callForBackgroundRemove(fileName: String?, image: ByteArray): Response {
+        val request: Request = Request.Builder()
+            .url("$backgroundRemoveBaseUrl/api/remove")
+            .post(
+                MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("file", fileName, image.toRequestBody())
+                    .build()
+            )
+            .build()
+
+        return client.newCall(request)
+            .execute()
+    }
+
+    companion object: KLogging()
+}
