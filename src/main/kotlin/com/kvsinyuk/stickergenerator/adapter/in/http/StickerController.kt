@@ -1,7 +1,9 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.http
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
+import com.kvsinyuk.stickergenerator.domain.ImageData
 import mu.KLogging
+import org.apache.commons.io.FilenameUtils
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -15,9 +17,12 @@ class StickerController(
 ) {
 
     @PostMapping
-    fun createSticker(@RequestParam("image") image: MultipartFile): ByteArray {
-        logger.info { "Received image ${image.originalFilename} with size ${image.size}" }
-        return createStickerUseCase.createSticker(image.originalFilename, image.bytes)
+    fun createSticker(@RequestParam("file") file: MultipartFile): ByteArray {
+        logger.info { "Received image ${file.originalFilename} with size ${file.size}" }
+        val image = ImageData(file.bytes,
+            file.originalFilename!!,
+            FilenameUtils.getExtension(file.originalFilename))
+        return createStickerUseCase.createSticker(image)
     }
 
     companion object: KLogging()

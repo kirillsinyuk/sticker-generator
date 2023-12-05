@@ -1,13 +1,34 @@
 package com.kvsinyuk.stickergenerator.applicaiton.service
 
+import com.kvsinyuk.stickergenerator.domain.ImageData
 import org.springframework.stereotype.Service
 import java.awt.image.BufferedImage
 import java.awt.image.Raster
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import javax.imageio.ImageIO
 
 @Service
 class CropImageService {
 
-    fun cropImage(image: BufferedImage): BufferedImage {
+    fun cropImage(image: ImageData): ImageData {
+        val croppedImage = image.mapToBufferedImage()
+            .let { crop(it) }
+        return image.copy(image = croppedImage.mapToByteArray(image.fileExtension))
+    }
+
+    private fun ImageData.mapToBufferedImage(): BufferedImage {
+        return ByteArrayInputStream(this.image)
+            .use { ImageIO.read(it) }
+    }
+
+    private fun BufferedImage.mapToByteArray(fileExtension: String): ByteArray =
+        ByteArrayOutputStream().use {
+            ImageIO.write(this, fileExtension, it)
+            it.toByteArray()
+        }
+
+    private fun crop(image: BufferedImage): BufferedImage {
         var minY = 0; var maxY = 0
         var minX = Int.MAX_VALUE; var maxX = 0
         var isBlank: Boolean

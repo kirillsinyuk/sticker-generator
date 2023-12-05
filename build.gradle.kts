@@ -27,6 +27,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
 
+	implementation("commons-io:commons-io:2.13.0")
+
 	// define a BOM and its version
 	implementation(platform("com.squareup.okhttp3:okhttp-bom:4.11.0"))
 
