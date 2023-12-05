@@ -12,7 +12,7 @@ class CropImageService {
 
     fun cropImage(image: ImageData): ImageData {
         val croppedImage = crop(image.mapToBufferedImage())
-        return image.copy(image = croppedImage.mapToByteArray(image.fileExtension))
+        return image.copy(image = croppedImage.mapToByteArray())
     }
 
     private fun crop(image: BufferedImage): BufferedImage {
