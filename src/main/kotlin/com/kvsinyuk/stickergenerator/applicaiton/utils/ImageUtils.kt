@@ -11,8 +11,8 @@ fun ImageData.mapToBufferedImage(): BufferedImage {
         .use { ImageIO.read(it) }
 }
 
-fun BufferedImage.mapToByteArray(fileExtension: String): ByteArray =
+fun BufferedImage.mapToByteArray(): ByteArray =
     ByteArrayOutputStream().use {
-        ImageIO.write(this, fileExtension, it)
+        ImageIO.write(this, "png", it)
         it.toByteArray()
     }

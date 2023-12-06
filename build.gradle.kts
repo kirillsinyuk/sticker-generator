@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.kvsinyuk"
-version = "0.3.1"
+version = "0.4.1"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
