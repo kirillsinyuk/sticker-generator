@@ -1,5 +1,7 @@
 package com.kvsinyuk.stickergenerator.applicaiton.service
 
+import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
+import com.kvsinyuk.stickergenerator.applicaiton.port.ResizeImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToBufferedImage
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.ImageData
@@ -8,10 +10,13 @@ import java.awt.image.BufferedImage
 import java.awt.image.Raster
 
 @Service
-class CropImageService {
+class CropImageServiceImpl(
+    private val resizeImageService: ResizeImageService
+) : CropImageService {
 
-    fun cropImage(image: ImageData): ImageData {
+    override fun cropImage(image: ImageData): ImageData {
         val croppedImage = crop(image.mapToBufferedImage())
+            .let { resizeImageService.resizeBufferedImage(it) }
         return image.copy(image = croppedImage.mapToByteArray())
     }
 

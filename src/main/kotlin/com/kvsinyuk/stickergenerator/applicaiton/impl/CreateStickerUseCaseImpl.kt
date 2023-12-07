@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.applicaiton.impl
 
+import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.RemoveBackgroundPort
-import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.domain.ImageData
 import org.springframework.stereotype.Component
 
