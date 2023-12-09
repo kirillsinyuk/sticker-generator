@@ -8,3 +8,6 @@ http:
   bg-removal:
     base-url: ${BG_REMOVAL_BASE_URL}
 
+sticker:
+  maxPixelSize: 512
+
