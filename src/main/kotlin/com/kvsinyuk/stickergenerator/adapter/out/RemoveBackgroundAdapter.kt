@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator.adapter.out
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.RemoveBackgroundPort
-import com.kvsinyuk.stickergenerator.domain.ImageData
+import com.kvsinyuk.stickergenerator.domain.StickerData
 import mu.KLogging
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -19,17 +19,17 @@ class RemoveBackgroundAdapter(
     @Value("\${http.bg-removal.base-url}")
     private lateinit var backgroundRemoveBaseUrl: String
 
-    override fun removeBackground(imageData: ImageData): ImageData {
-        val response = callForBackgroundRemove(imageData)
+    override fun removeBackground(stickerData: StickerData): StickerData {
+        val response = callForBackgroundRemove(stickerData)
         return response.body
-            ?.let { body -> imageData.copy(image = body.bytes()) }
+            ?.let { body -> stickerData.copy(image = body.bytes()) }
             ?: run {
                 logger.error { response.message }
                 throw RuntimeException(response.message)
             }
     }
 
-    private fun callForBackgroundRemove(imageData: ImageData): Response {
+    private fun callForBackgroundRemove(stickerData: StickerData): Response {
         val request: Request = Request.Builder()
             .url("$backgroundRemoveBaseUrl/api/remove")
             .post(
@@ -37,8 +37,8 @@ class RemoveBackgroundAdapter(
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(
                         "file",
-                        imageData.originalName,
-                        imageData.image.toRequestBody())
+                        stickerData.originalFilename,
+                        stickerData.image.toRequestBody())
                     .build()
             )
             .build()

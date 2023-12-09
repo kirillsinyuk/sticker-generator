@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.out
 
-import com.kvsinyuk.stickergenerator.domain.ImageData
+import com.kvsinyuk.stickergenerator.domain.StickerData
 
 interface RemoveBackgroundPort {
 
-    fun removeBackground(imageData: ImageData): ImageData
+    fun removeBackground(stickerData: StickerData): StickerData
 }

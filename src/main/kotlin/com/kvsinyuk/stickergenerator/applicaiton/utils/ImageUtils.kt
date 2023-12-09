@@ -1,12 +1,12 @@
 package com.kvsinyuk.stickergenerator.applicaiton.utils
 
-import com.kvsinyuk.stickergenerator.domain.ImageData
+import com.kvsinyuk.stickergenerator.domain.StickerData
 import java.awt.image.BufferedImage
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
 
-fun ImageData.mapToBufferedImage(): BufferedImage {
+fun StickerData.mapToBufferedImage(): BufferedImage {
     return ByteArrayInputStream(this.image)
         .use { ImageIO.read(it) }
 }
