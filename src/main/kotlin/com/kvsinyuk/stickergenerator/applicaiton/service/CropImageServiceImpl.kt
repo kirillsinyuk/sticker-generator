@@ -1,24 +1,17 @@
 package com.kvsinyuk.stickergenerator.applicaiton.service
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
-import com.kvsinyuk.stickergenerator.applicaiton.port.ResizeImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToBufferedImage
-import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
-import com.kvsinyuk.stickergenerator.domain.ImageData
+import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.springframework.stereotype.Service
 import java.awt.image.BufferedImage
 import java.awt.image.Raster
 
 @Service
-class CropImageServiceImpl(
-    private val resizeImageService: ResizeImageService
-) : CropImageService {
+class CropImageServiceImpl: CropImageService {
 
-    override fun cropImage(image: ImageData): ImageData {
-        val croppedImage = crop(image.mapToBufferedImage())
-            .let { resizeImageService.resizeBufferedImage(it) }
-        return image.copy(image = croppedImage.mapToByteArray())
-    }
+    override fun cropImage(image: StickerData) =
+        crop(image.mapToBufferedImage())
 
     private fun crop(image: BufferedImage): BufferedImage {
         var minY = 0; var maxY = 0

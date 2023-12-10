@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.`in`
 
-import com.kvsinyuk.stickergenerator.domain.ImageData
+import com.kvsinyuk.stickergenerator.domain.StickerData
 
 interface CreateStickerUseCase {
 
-    fun createSticker(imageData: ImageData): ByteArray
+    fun createSticker(stickerData: StickerData): ByteArray
 }

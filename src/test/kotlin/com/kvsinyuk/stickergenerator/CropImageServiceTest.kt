@@ -2,7 +2,7 @@ package com.kvsinyuk.stickergenerator
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToBufferedImage
-import com.kvsinyuk.stickergenerator.domain.ImageData
+import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -21,7 +21,7 @@ class CropImageServiceTest {
 	fun cropImageTest() {
 		// given
 		val imageUrl = javaClass.getResource(examplePath)
-		val image = ImageData(imageUrl.readBytes(), imageUrl.file)
+		val image = StickerData(imageUrl.readBytes(), imageUrl.file)
 
 		// when
 		val croppedImage = cropImageService.cropImage(image)
