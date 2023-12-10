@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator.applicaiton.service
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
-import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToBufferedImage
+import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.springframework.stereotype.Service
 import java.awt.image.BufferedImage
@@ -10,8 +10,9 @@ import java.awt.image.Raster
 @Service
 class CropImageServiceImpl: CropImageService {
 
-    override fun cropImage(image: StickerData) =
-        crop(image.mapToBufferedImage())
+    override fun cropImage(stickerData: StickerData) =
+        crop(stickerData.getBufferedImage())
+            .let { stickerData.apply { image = it.mapToByteArray() } }
 
     private fun crop(image: BufferedImage): BufferedImage {
         var minY = 0; var maxY = 0

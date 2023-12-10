@@ -99,6 +99,7 @@ class AddTextServiceImpl : AddTextService {
             paintTextWithOutline(graphics, line, (image.width - stringBounds.width.toInt()) / 2, y)
             y += graphics.fontMetrics.height
         }
+        graphics.dispose()
     }
 
     private fun paintTextWithOutline(graphics: Graphics2D, text: String, x: Int, y: Int) {
