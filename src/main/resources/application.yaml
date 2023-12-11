@@ -10,4 +10,5 @@ http:
 
 sticker:
   maxPixelSize: 512
+  topPaddingPercent: 15
 
