@@ -5,10 +5,13 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.4"
 	kotlin("jvm") version "1.9.20"
 	kotlin("plugin.spring") version "1.9.20"
+	kotlin("kapt") version "1.9.20"
 }
 
 group = "com.kvsinyuk"
 version = "0.5.0"
+
+val mapstructVersion = "1.5.3.Final"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -27,12 +30,13 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
 
+	kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
+	implementation("org.mapstruct:mapstruct:$mapstructVersion")
+
 	implementation("commons-io:commons-io:2.13.0")
+	implementation("com.github.pengrad:java-telegram-bot-api:6.9.1")
 
-	// define a BOM and its version
 	implementation(platform("com.squareup.okhttp3:okhttp-bom:4.11.0"))
-
-	// define any required OkHttp artifacts without version
 	implementation("com.squareup.okhttp3:okhttp")
 	implementation("com.squareup.okhttp3:logging-interceptor")
 

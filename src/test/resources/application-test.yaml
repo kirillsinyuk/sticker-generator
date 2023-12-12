@@ -2,4 +2,7 @@ http:
   bg-removal:
     base-url: http://localhost:8090
 
+bot:
+  token: 123testToken
+
 

@@ -1,4 +1,6 @@
 spring:
+  messages:
+    basename: i18n/messages
   servlet:
     multipart:
       max-file-size: 5MB
@@ -7,6 +9,9 @@ spring:
 http:
   bg-removal:
     base-url: ${BG_REMOVAL_BASE_URL}
+
+bot:
+  token: ${BOT_TOKEN}
 
 sticker:
   maxPixelSize: 512
