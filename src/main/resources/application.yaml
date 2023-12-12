@@ -1,4 +1,7 @@
 spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
   messages:
     basename: i18n/messages
   servlet:

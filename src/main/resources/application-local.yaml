@@ -1,3 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/stickers
 http:
   bg-removal:
     base-url: http://localhost:8090

@@ -11,5 +11,7 @@ abstract class TelegramUpdateMessageMapper {
 
     @Mapping(target = "chatId", expression = "java(update.message().chat().id())")
     @Mapping(target = "message", expression = "java(update.message().text())")
+    @Mapping(target = "document", expression = "java(update.message().document())")
+    @Mapping(target = "photos", expression = "java(update.message().photo())")
     abstract fun toMessage(update: Update): TelegramUpdateMessage
 }
