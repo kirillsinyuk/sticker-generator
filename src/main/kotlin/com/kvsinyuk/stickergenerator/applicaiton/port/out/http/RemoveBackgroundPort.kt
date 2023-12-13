@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.applicaiton.port.out
+package com.kvsinyuk.stickergenerator.applicaiton.port.out.http
 
 import com.kvsinyuk.stickergenerator.domain.StickerData
 

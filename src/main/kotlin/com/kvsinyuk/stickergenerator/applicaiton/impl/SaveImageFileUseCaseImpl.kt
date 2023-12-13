@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator.applicaiton.impl
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.SaveImageFileUseCase
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.TelegramFilePort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramFilePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.SaveStickerDataUseCase
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import com.pengrad.telegrambot.model.Document

@@ -1,6 +1,6 @@
-package com.kvsinyuk.stickergenerator.adapter.out
+package com.kvsinyuk.stickergenerator.adapter.out.http
 
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.RemoveBackgroundPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import mu.KLogging
 import okhttp3.MultipartBody

@@ -1,7 +1,7 @@
-package com.kvsinyuk.stickergenerator.adapter.`in`.http.telegram.handlers
+package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.TelegramMessagePort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 import com.kvsinyuk.stickergenerator.utils.Commands.START_CMD
 import org.springframework.stereotype.Component
