@@ -10,8 +10,8 @@ import javax.imageio.ImageIO
 data class StickerData(
     var image: ByteArray,
     val originalFilename: String,
-    val topText: String = "",
-    val bottomText: String = "",
+    var topText: String = "",
+    var bottomText: String = "",
     @Id
     var chatId: Long? = null,
     var status: Status = Status.FILE_ADDED,
