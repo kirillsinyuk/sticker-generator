@@ -1,6 +1,11 @@
 package com.kvsinyuk.stickergenerator.domain
 
+import com.pengrad.telegrambot.model.Document
+import com.pengrad.telegrambot.model.PhotoSize
+
 data class TelegramUpdateMessage(
-    val message: String,
-    var chatId: Long
+    val message: String?,
+    var chatId: Long,
+    val document: Document?,
+    val photos: Array<PhotoSize>?,
 )

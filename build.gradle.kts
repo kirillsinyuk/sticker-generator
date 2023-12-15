@@ -23,12 +23,13 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.2.0")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
+	implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 
 	kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
 	implementation("org.mapstruct:mapstruct:$mapstructVersion")
