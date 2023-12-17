@@ -5,7 +5,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.port.PadImageService
 import com.kvsinyuk.stickergenerator.applicaiton.port.ResizeImageService
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.RemoveBackgroundPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.springframework.stereotype.Component

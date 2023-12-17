@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.kvsinyuk"
-version = "0.5.0"
+version = "1.0.0"
 
 val mapstructVersion = "1.5.3.Final"
 

@@ -1,7 +1,7 @@
-package com.kvsinyuk.stickergenerator.adapter.`in`.http.telegram
+package com.kvsinyuk.stickergenerator.adapter.`in`.telegram
 
 import com.kvsinyuk.stickergenerator.adapter.mapper.TelegramUpdateMessageMapper
-import com.kvsinyuk.stickergenerator.adapter.`in`.http.telegram.handlers.TelegramUpdateHandler
+import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.UpdatesListener
 import com.pengrad.telegrambot.model.Update

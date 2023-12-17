@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.adapter.`in`.http.telegram.handlers
+package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers
 
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 

@@ -1,7 +1,7 @@
-package com.kvsinyuk.stickergenerator.adapter.`in`.http.telegram.handlers
+package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.TelegramMessagePort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindStickerDataUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.SaveStickerDataUseCase
 import com.kvsinyuk.stickergenerator.domain.Status
@@ -18,7 +18,7 @@ class TopTextHandler(
     override fun process(update: TelegramUpdateMessage) {
         findStickerDataUseCase.findByChatId(update.chatId)
             ?.apply {
-                topText = update.message!!.trim()
+                topText = update.message.takeIf { it != "*" } ?: ""
                 status = Status.TOP_TEXT_ADDED
             }?.let { saveStickerDataUseCase.save(it) }
         telegramMessagePort.sendMessage(
@@ -28,6 +28,6 @@ class TopTextHandler(
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.message?.isNotEmpty() == true
+        !update.message.isNullOrBlank()
                 && findStickerDataUseCase.findByChatId(update.chatId)?.status == Status.FILE_ADDED
 }
