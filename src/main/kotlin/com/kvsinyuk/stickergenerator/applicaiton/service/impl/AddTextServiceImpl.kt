@@ -1,6 +1,6 @@
-package com.kvsinyuk.stickergenerator.applicaiton.service
+package com.kvsinyuk.stickergenerator.applicaiton.service.impl
 
-import com.kvsinyuk.stickergenerator.applicaiton.port.AddTextService
+import com.kvsinyuk.stickergenerator.applicaiton.service.AddTextService
 import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
 import java.awt.BasicStroke

@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator
 
-import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
-import com.kvsinyuk.stickergenerator.applicaiton.port.PadImageService
+import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
+import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
