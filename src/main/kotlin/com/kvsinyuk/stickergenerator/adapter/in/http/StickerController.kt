@@ -19,8 +19,8 @@ class StickerController(
     @PostMapping(produces = [MediaType.IMAGE_PNG_VALUE])
     fun createSticker(
         @RequestParam("file") file: MultipartFile,
-        @RequestParam("topText") topText: String,
-        @RequestParam("bottomText") bottomText: String
+        @RequestParam("topText") topText: String = "",
+        @RequestParam("bottomText") bottomText: String = ""
     ): ByteArray {
         logger.info { "Received image ${file.originalFilename} with size ${file.size}" }
         val image = StickerData(file.bytes, file.originalFilename!!, topText, bottomText)
