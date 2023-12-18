@@ -1,0 +1,38 @@
+:service-name: Sticker creator service
+:imagesdir: ./docs/img
+
+= {service-name}
+:toc:
+:toc-title:
+:toclevels: 4
+:sectnums:
+
+=== Common info
+
+This service implements handlers for Telegram bor for easy stickers creation.
+The main platform for this service is Telegram, because it`s an easiest way to provide UI for interaction.
+Maybe one time there will be a webpage or API, but not in near future.
+
+Currently, the core features are:
+* Remove picture background(it`s not perfect, so keep it in mind);
+* Crop empty space;
+* Resize image to sticker size(at least one side should be 512px);
+* Add top and bottom text(in case of adding top text 15% top padding will be added as well);
+
+Basically the result is something like this:
+
+[cols="a,a", frame=none, role="center"]
+|===
+| image::example-img-before.png[]
+| image::example-img-after.png[]
+|===
+
+=== Local run
+
+To run service you ought to have Docker
+
+Just run the command:
+`docker-compose up`
+(uncomment service container if you want it fully containerized)
+
+Or you can run service locally(with `local` profile) and try it through rest api
