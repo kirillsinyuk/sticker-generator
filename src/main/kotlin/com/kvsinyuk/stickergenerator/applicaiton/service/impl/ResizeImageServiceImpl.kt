@@ -1,6 +1,7 @@
-package com.kvsinyuk.stickergenerator.applicaiton.service
+package com.kvsinyuk.stickergenerator.applicaiton.service.impl
 
-import com.kvsinyuk.stickergenerator.applicaiton.port.ResizeImageService
+import com.kvsinyuk.stickergenerator.applicaiton.service.ResizeImageService
+import com.kvsinyuk.stickergenerator.applicaiton.service.Resizer
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.awt.image.BufferedImage

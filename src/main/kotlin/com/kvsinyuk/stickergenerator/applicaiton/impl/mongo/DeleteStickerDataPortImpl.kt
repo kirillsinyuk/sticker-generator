@@ -1,14 +1,14 @@
 package com.kvsinyuk.stickergenerator.applicaiton.impl.mongo
 
 import com.kvsinyuk.stickergenerator.adapter.out.mongo.StickerDataRepository
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindStickerDataUseCase
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteStickerDataPort
 import org.springframework.stereotype.Component
 
 @Component
-class FindStickerDataUseCaseImpl(
+class DeleteStickerDataPortImpl(
     private val stickerDataRepository: StickerDataRepository
-) : FindStickerDataUseCase {
+) : DeleteStickerDataPort {
 
-    override fun findByChatId(chatId: Long) =
-        stickerDataRepository.findByChatId(chatId)
+    override fun delete(chatId: Long) =
+        stickerDataRepository.deleteById(chatId)
 }

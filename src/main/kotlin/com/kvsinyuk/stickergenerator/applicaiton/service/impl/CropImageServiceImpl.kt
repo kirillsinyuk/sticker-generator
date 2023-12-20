@@ -1,6 +1,6 @@
-package com.kvsinyuk.stickergenerator.applicaiton.service
+package com.kvsinyuk.stickergenerator.applicaiton.service.impl
 
-import com.kvsinyuk.stickergenerator.applicaiton.port.CropImageService
+import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.springframework.stereotype.Service

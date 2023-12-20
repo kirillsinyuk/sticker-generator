@@ -1,6 +1,6 @@
-package com.kvsinyuk.stickergenerator.applicaiton.service
+package com.kvsinyuk.stickergenerator.applicaiton.service.impl
 
-import com.kvsinyuk.stickergenerator.applicaiton.port.PadImageService
+import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
