@@ -2,6 +2,7 @@ package com.kvsinyuk.stickergenerator
 
 import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
+import com.kvsinyuk.stickergenerator.domain.Status
 import com.kvsinyuk.stickergenerator.domain.StickerData
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,7 +25,7 @@ class CropImageServiceTest {
 	fun cropImageTest() {
 		// given
 		val imageUrl = javaClass.getResource(examplePath)
-		val image = StickerData(imageUrl.readBytes(), imageUrl.file, "", "")
+		val image = StickerData(1, Status.MAKE_STICKER, imageUrl.readBytes(), imageUrl.file, "", "")
 
 		// when
 		val croppedImage = cropImageService.cropImage(image)
@@ -39,7 +40,7 @@ class CropImageServiceTest {
 	fun cropImageWithPaddingTest() {
 		// given
 		val imageUrl = javaClass.getResource(examplePath)
-		val image = StickerData(imageUrl.readBytes(), imageUrl.file, "test text", "")
+		val image = StickerData(1, Status.MAKE_STICKER, imageUrl.readBytes(), imageUrl.file, "test text", "")
 
 		// when
 		val croppedImage = cropImageService.cropImage(image)

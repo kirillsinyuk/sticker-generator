@@ -1,6 +1,7 @@
 package com.kvsinyuk.stickergenerator.domain
 
 enum class Status {
-    FILE_ADDED,
-    TOP_TEXT_ADDED
+    MAKE_STICKER,
+    MAKE_STICKER_FILE_ADDED,
+    MAKE_STICKER_TOP_TEXT_ADDED
 }

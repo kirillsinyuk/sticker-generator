@@ -28,5 +28,5 @@ class BottomTextHandler(
 
     override fun canApply(update: TelegramUpdateMessage) =
         !update.message.isNullOrBlank()
-                && findStickerDataPort.findByChatId(update.chatId)?.status == Status.TOP_TEXT_ADDED
+                && findStickerDataPort.findByChatId(update.chatId)?.status == Status.MAKE_STICKER_TOP_TEXT_ADDED
 }

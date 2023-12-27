@@ -19,15 +19,15 @@ class TopTextHandler(
         findStickerDataPort.findByChatId(update.chatId)
             ?.apply {
                 topText = update.message.takeIf { it != "*" } ?: ""
-                status = Status.TOP_TEXT_ADDED
+                status = Status.MAKE_STICKER_TOP_TEXT_ADDED
             }?.let { saveStickerDataPort.save(it) }
         telegramMessagePort.sendMessage(
             update.chatId,
-            messagePort.getMessage("command.top-text-added.response")
+            messagePort.getMessage("command.mk-sticker.top-text-added.response")
         )
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
         !update.message.isNullOrBlank()
-                && findStickerDataPort.findByChatId(update.chatId)?.status == Status.FILE_ADDED
+                && findStickerDataPort.findByChatId(update.chatId)?.status == Status.MAKE_STICKER_FILE_ADDED
 }
