@@ -8,13 +8,13 @@ import javax.imageio.ImageIO
 
 @Document
 data class StickerData(
-    var image: ByteArray,
-    val originalFilename: String,
+    @Id
+    var chatId: Long,
+    var status: Status,
+    var image: ByteArray = ByteArray(0),
+    var originalFilename: String = "",
     var topText: String = "",
     var bottomText: String = "",
-    @Id
-    var chatId: Long? = null,
-    var status: Status = Status.FILE_ADDED,
 ) {
 
     fun getBufferedImage(): BufferedImage =
