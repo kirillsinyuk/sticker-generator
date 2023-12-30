@@ -4,6 +4,13 @@ services:
     command: s
     ports:
       - 8090:5000
+  facefusion-api:
+    image: sinyukkirill/facefusion
+    command: [ 'python', 'run.py', '--api' ]
+    labels:
+      org.springframework.boot.readiness-check.tcp.disable: true
+    ports:
+      - 8091:8000
   mongo:
     image: mongo
     environment:
