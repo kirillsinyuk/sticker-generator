@@ -3,32 +3,40 @@ package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.sticker
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindStickerDataPort
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.SaveStickerDataPort
-import com.kvsinyuk.stickergenerator.domain.Status
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.SaveBotDataPort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
+import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
+import com.kvsinyuk.stickergenerator.domain.sticker.StickerStatus
 import org.springframework.stereotype.Component
 
 @Component
 class TopTextHandler(
     private val telegramMessagePort: TelegramMessagePort,
-    private val findStickerDataPort: FindStickerDataPort,
-    private val saveStickerDataPort: SaveStickerDataPort,
+    private val findBotDataPort: FindBotDataPort,
+    private val saveBotDataPort: SaveBotDataPort,
     private val messagePort: MessageSourcePort
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        findStickerDataPort.findByChatId(update.chatId)
-            ?.apply {
+        val botData = findBotDataPort.findByChatId(update.chatId)
+        botData!!.getAsCreateStickerData()
+            .apply {
+                status = StickerStatus.TOP_TEXT_ADDED
                 topText = update.message.takeIf { it != "*" } ?: ""
-                status = Status.MAKE_STICKER_TOP_TEXT_ADDED
-            }?.let { saveStickerDataPort.save(it) }
+            }
+        saveBotDataPort.save(botData)
         telegramMessagePort.sendMessage(
             update.chatId,
             messagePort.getMessage("command.mk-sticker.top-text-added.response")
         )
     }
 
-    override fun canApply(update: TelegramUpdateMessage) =
-        !update.message.isNullOrBlank()
-                && findStickerDataPort.findByChatId(update.chatId)?.status == Status.MAKE_STICKER_FILE_ADDED
+    override fun canApply(update: TelegramUpdateMessage): Boolean {
+        if (!update.message.isNullOrBlank()) {
+            val commandData = findBotDataPort.findByChatId(update.chatId)?.commandData
+            return commandData?.isStickerData() == true
+                    && (commandData as CreateStickerData).status == StickerStatus.SOURCE_FILE_ADDED
+        }
+        return false
+    }
 }

@@ -1,6 +1,6 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo
 
-interface DeleteStickerDataPort {
+interface DeleteBotDataPort {
 
     fun delete(chatId: Long)
 }

@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://root:example@localhost:27017/stickers
+      uri: mongodb://root:example@localhost:27017/stickers?authSource=admin
 http:
   bg-removal:
     base-url: http://localhost:8090

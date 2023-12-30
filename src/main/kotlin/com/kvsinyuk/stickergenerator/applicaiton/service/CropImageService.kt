@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.applicaiton.service
 
-import com.kvsinyuk.stickergenerator.domain.BotData
+import java.awt.image.BufferedImage
 
 interface CropImageService {
 
-    fun cropImage(botData: BotData): BotData
+    fun cropImage(image: BufferedImage): BufferedImage
 }

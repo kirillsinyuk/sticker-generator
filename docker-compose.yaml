@@ -11,7 +11,7 @@ services:
       org.springframework.boot.readiness-check.tcp.disable: true
     ports:
       - 8091:8000
-  mongo:
+  mongodb:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root

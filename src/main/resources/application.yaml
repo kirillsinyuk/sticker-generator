@@ -1,6 +1,7 @@
 spring:
   data:
     mongodb:
+      database: stickers
       uri: ${MONGO_URI}
   messages:
     basename: i18n/messages

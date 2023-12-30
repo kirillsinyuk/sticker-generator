@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.out.http
 
-import com.kvsinyuk.stickergenerator.domain.BotData
+import java.awt.image.BufferedImage
 
 interface RemoveBackgroundPort {
 
-    fun removeBackground(botData: BotData): BotData
+    fun removeBackground(image: BufferedImage, originalFilename: String): BufferedImage
 }

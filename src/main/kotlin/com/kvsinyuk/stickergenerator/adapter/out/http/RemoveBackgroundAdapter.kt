@@ -1,7 +1,8 @@
 package com.kvsinyuk.stickergenerator.adapter.out.http
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
-import com.kvsinyuk.stickergenerator.domain.BotData
+import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
+import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import mu.KLogging
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -10,6 +11,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import java.awt.image.BufferedImage
 
 @Component
 class RemoveBackgroundAdapter(
@@ -19,17 +21,17 @@ class RemoveBackgroundAdapter(
     @Value("\${http.bg-removal.base-url}")
     private lateinit var backgroundRemoveBaseUrl: String
 
-    override fun removeBackground(botData: BotData): BotData {
-        val response = callForBackgroundRemove(botData)
-        return response.body
-            ?.let { body -> botData.copy(image = body.bytes()) }
+    override fun removeBackground(image: BufferedImage, originalFilename: String): BufferedImage {
+        val response = callForBackgroundRemove(image, originalFilename)
+        return response.body?.bytes()
+            ?.getBufferedImage()
             ?: run {
                 logger.error { response.message }
                 throw RuntimeException(response.message)
             }
     }
 
-    private fun callForBackgroundRemove(botData: BotData): Response {
+    private fun callForBackgroundRemove(image: BufferedImage, originalFilename: String): Response {
         val request: Request = Request.Builder()
             .url("$backgroundRemoveBaseUrl/api/remove")
             .post(
@@ -37,8 +39,8 @@ class RemoveBackgroundAdapter(
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(
                         "file",
-                        botData.originalFilename,
-                        botData.image.toRequestBody())
+                        originalFilename,
+                        image.mapToByteArray().toRequestBody())
                     .build()
             )
             .build()
