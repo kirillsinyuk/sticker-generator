@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo
 
-import com.kvsinyuk.stickergenerator.domain.StickerData
+import com.kvsinyuk.stickergenerator.domain.BotData
 
 interface SaveStickerDataPort {
 
-    fun save(stickerData: StickerData): StickerData
+    fun save(botData: BotData): BotData
 }
