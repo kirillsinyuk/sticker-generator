@@ -5,4 +5,5 @@ object Commands {
     const val HELP_CMD = "/help"
     const val MAKE_STICKER_CMD = "/mksticker"
     const val FACE_SWAP_CMD = "/swapface"
+    const val REMOVE_BACKGROUND_CMD = "/rmbackground"
 }
