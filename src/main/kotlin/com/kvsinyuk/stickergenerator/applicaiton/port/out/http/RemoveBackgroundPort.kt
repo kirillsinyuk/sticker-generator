@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.out.http
 
-import com.kvsinyuk.stickergenerator.domain.StickerData
+import com.kvsinyuk.stickergenerator.domain.BotData
 
 interface RemoveBackgroundPort {
 
-    fun removeBackground(stickerData: StickerData): StickerData
+    fun removeBackground(botData: BotData): BotData
 }

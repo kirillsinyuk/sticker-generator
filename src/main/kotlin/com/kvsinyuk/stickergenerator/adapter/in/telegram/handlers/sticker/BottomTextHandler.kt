@@ -1,5 +1,6 @@
-package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers
+package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.sticker
 
+import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteStickerDataPort

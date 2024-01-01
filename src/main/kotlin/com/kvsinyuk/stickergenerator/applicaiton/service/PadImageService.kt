@@ -1,9 +1,9 @@
 package com.kvsinyuk.stickergenerator.applicaiton.service
 
-import com.kvsinyuk.stickergenerator.domain.StickerData
+import com.kvsinyuk.stickergenerator.domain.BotData
 import java.awt.image.BufferedImage
 
 interface PadImageService {
 
-    fun addPaddingIfNecessary(stickerData: StickerData): BufferedImage
+    fun addPaddingIfNecessary(botData: BotData): BufferedImage
 }

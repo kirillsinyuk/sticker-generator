@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator.applicaiton.service.impl
 
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
-import com.kvsinyuk.stickergenerator.domain.StickerData
+import com.kvsinyuk.stickergenerator.domain.BotData
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.awt.image.BufferedImage
@@ -12,9 +12,9 @@ class PadImageServiceImpl(
     private val topPaddingPercent: Int
 ) : PadImageService {
 
-    override fun addPaddingIfNecessary(stickerData: StickerData): BufferedImage {
-        val image = stickerData.getBufferedImage()
-        if (stickerData.topText.isBlank()) {
+    override fun addPaddingIfNecessary(botData: BotData): BufferedImage {
+        val image = botData.getBufferedImage()
+        if (botData.topText.isBlank()) {
             return image
         }
         val topPaddingPixels = image.height.times(topPaddingPercent).div(100)
