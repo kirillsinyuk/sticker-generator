@@ -2,7 +2,7 @@ package com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo
 
 import com.kvsinyuk.stickergenerator.domain.BotData
 
-interface FindBotDataPort {
+interface GetBotDataPort {
 
-    fun findByChatId(chatId: Long): BotData?
+    fun getByChatId(chatId: Long): BotData
 }
