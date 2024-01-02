@@ -2,8 +2,10 @@ package com.kvsinyuk.stickergenerator
 
 import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
-import com.kvsinyuk.stickergenerator.domain.Status
+import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
 import com.kvsinyuk.stickergenerator.domain.BotData
+import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
+import com.kvsinyuk.stickergenerator.domain.sticker.StickerStatus
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -25,11 +27,14 @@ class CropImageServiceTest {
 	fun cropImageTest() {
 		// given
 		val imageUrl = javaClass.getResource(examplePath)
-		val image = BotData(1, Status.MAKE_STICKER, imageUrl.readBytes(), imageUrl.file, "", "")
+		val botData = BotData(
+			1,
+			CreateStickerData(StickerStatus.INIT, imageUrl.file, "", "")
+				.apply { image = imageUrl.readBytes() }
+		)
 
 		// when
-		val croppedImage = cropImageService.cropImage(image)
-			.getBufferedImage()
+		val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
 
 		// then
 		assert(croppedImage.height == 228)
@@ -40,16 +45,19 @@ class CropImageServiceTest {
 	fun cropImageWithPaddingTest() {
 		// given
 		val imageUrl = javaClass.getResource(examplePath)
-		val image = BotData(1, Status.MAKE_STICKER, imageUrl.readBytes(), imageUrl.file, "test text", "")
+		val botData = BotData(
+			1,
+			CreateStickerData(StickerStatus.INIT, imageUrl.file, "test text", "")
+				.apply { image = imageUrl.readBytes() }
+		)
 
 		// when
-		val croppedImage = cropImageService.cropImage(image)
-		val paddedImage = padImageService.addPaddingIfNecessary(croppedImage)
+		val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
+		val paddedImage = padImageService.addPaddingIfNecessary(croppedImage, true)
 
 		// then
-		val croppedBufferedImage = croppedImage.getBufferedImage()
-		assert(croppedBufferedImage.width == paddedImage.width)
-		assert(croppedBufferedImage.height < paddedImage.height)
+		assert(croppedImage.width == paddedImage.width)
+		assert(croppedImage.height < paddedImage.height)
 	}
 
 }

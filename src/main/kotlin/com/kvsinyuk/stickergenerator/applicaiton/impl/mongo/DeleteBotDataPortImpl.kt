@@ -1,13 +1,13 @@
 package com.kvsinyuk.stickergenerator.applicaiton.impl.mongo
 
 import com.kvsinyuk.stickergenerator.adapter.out.mongo.StickerDataRepository
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteStickerDataPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteBotDataPort
 import org.springframework.stereotype.Component
 
 @Component
-class DeleteStickerDataPortImpl(
+class DeleteBotDataPortImpl(
     private val stickerDataRepository: StickerDataRepository
-) : DeleteStickerDataPort {
+) : DeleteBotDataPort {
 
     override fun delete(chatId: Long) =
         stickerDataRepository.deleteById(chatId)

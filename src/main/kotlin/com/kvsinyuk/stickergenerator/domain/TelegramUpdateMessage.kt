@@ -5,7 +5,7 @@ import com.pengrad.telegrambot.model.PhotoSize
 
 data class TelegramUpdateMessage(
     val message: String?,
-    var chatId: Long,
+    val chatId: Long,
     val document: Document?,
-    val photos: Array<PhotoSize>?,
+    val photos: Array<PhotoSize>?
 )
