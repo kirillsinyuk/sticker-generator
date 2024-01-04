@@ -1,3 +1,7 @@
+FROM gradle:8.1.1-jdk17
+COPY ./ ./
+RUN gradle build
+
 FROM openjdk:17
 
 ARG JAR=/build/libs/*.jar
