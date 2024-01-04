@@ -3,6 +3,7 @@ package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.sticker
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.SaveStickerDataUseCase
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramFilePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
@@ -15,6 +16,7 @@ class ImageHandler(
     private val telegramFilePort: TelegramFilePort,
     private val telegramMessagePort: TelegramMessagePort,
     private val getBotDataPort: GetBotDataPort,
+    private val findBotDataPort: FindBotDataPort,
     private val saveStickerDataUseCase: SaveStickerDataUseCase,
     private val messagePort: MessageSourcePort
 ) : TelegramUpdateHandler {
@@ -36,6 +38,6 @@ class ImageHandler(
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.document != null && getBotDataPort.getByChatId(update.chatId).commandData
-            .isStickerData()
+        update.document != null
+                && findBotDataPort.findByChatId(update.chatId)?.commandData?.isStickerData() == true
 }
