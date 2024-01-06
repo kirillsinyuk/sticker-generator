@@ -5,7 +5,7 @@ import org.springframework.data.annotation.TypeAlias
 
 @TypeAlias("face_swap")
 data class FaceSwapData(
-    val status: FaceSwapStatus = FaceSwapStatus.INIT,
+    var status: FaceSwapStatus = FaceSwapStatus.INIT,
     var originalFilename: String = "result.png"
 ): CommandData() {
 

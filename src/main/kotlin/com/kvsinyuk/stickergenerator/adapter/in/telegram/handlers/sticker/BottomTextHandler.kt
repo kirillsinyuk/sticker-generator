@@ -4,7 +4,7 @@ import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpda
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteBotDataPort
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component
 @Component
 class BottomTextHandler(
     private val telegramMessagePort: TelegramMessagePort,
-    private val findBotDataPort: FindBotDataPort,
+    private val getBotDataPort: GetBotDataPort,
     private val createStickerUseCase: CreateStickerUseCase,
     private val deleteBotDataPort: DeleteBotDataPort
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        val stickerData = findBotDataPort.findByChatId(update.chatId)!!
+        val stickerData = getBotDataPort.getByChatId(update.chatId)
         stickerData.getAsCreateStickerData()
             .apply { bottomText = update.message.takeIf { it != "*" } ?: "" }
 
@@ -33,9 +33,9 @@ class BottomTextHandler(
 
     override fun canApply(update: TelegramUpdateMessage): Boolean {
         if (!update.message.isNullOrBlank()) {
-            val commandData = findBotDataPort.findByChatId(update.chatId)?.commandData
-            return commandData?.isStickerData() == true
-                    && (commandData as CreateStickerData).status == StickerStatus.TOP_TEXT_ADDED
+            val botData = getBotDataPort.getByChatId(update.chatId)
+            return botData.commandData.isStickerData()
+                    && botData.getAsCreateStickerData().status == StickerStatus.TOP_TEXT_ADDED
         }
         return false
     }
