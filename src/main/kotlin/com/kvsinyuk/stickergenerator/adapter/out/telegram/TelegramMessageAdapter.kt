@@ -1,5 +1,6 @@
 package com.kvsinyuk.stickergenerator.adapter.out.telegram
 
+import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.model.request.ParseMode
@@ -9,13 +10,15 @@ import org.springframework.stereotype.Component
 
 @Component
 class TelegramMessageAdapter(
-    private val bot: TelegramBot
+    private val bot: TelegramBot,
+    private val messagePort: MessageSourcePort
 ) : TelegramMessagePort {
 
     private val DEFAULT_TYPE = "image/png"
 
-    override fun sendMessage(chatId: Long, msg: String) {
-        mapMessage(chatId, msg)
+    override fun sendMessageByCode(chatId: Long, msgCode: String) {
+        val responseMsg = messagePort.getMessage(msgCode)
+        mapMessage(chatId, responseMsg)
             .let { bot.execute(it) }
     }
 

@@ -26,7 +26,7 @@ class TopTextHandler(
                 topText = update.message.takeIf { it != "*" } ?: ""
             }
         saveBotDataPort.save(botData)
-        telegramMessagePort.sendMessage(
+        telegramMessagePort.sendMessageByCode(
             update.chatId,
             messagePort.getMessage("command.mk-sticker.top-text-added.response")
         )
