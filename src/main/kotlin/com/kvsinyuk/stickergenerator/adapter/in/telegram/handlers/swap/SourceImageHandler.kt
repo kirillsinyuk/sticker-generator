@@ -3,6 +3,7 @@ package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.swap
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.SaveStickerDataUseCase
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramFilePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
@@ -15,6 +16,7 @@ class SourceImageHandler(
     private val telegramMessagePort: TelegramMessagePort,
     private val saveStickerDataUseCase: SaveStickerDataUseCase,
     private val getBotDataPort: GetBotDataPort,
+    private val findBotDataPort: FindBotDataPort,
     private val telegramFilePort: TelegramFilePort,
     private val messagePort: MessageSourcePort
 ) : TelegramUpdateHandler {
@@ -35,8 +37,8 @@ class SourceImageHandler(
 
     override fun canApply(update: TelegramUpdateMessage): Boolean {
         if (update.document != null) {
-            val botData = getBotDataPort.getByChatId(update.chatId)
-            return botData.commandData.isFaceSwapData()
+            val botData = findBotDataPort.findByChatId(update.chatId)
+            return botData?.commandData?.isFaceSwapData() == true
                     && botData.getAsFaceSwapData().status == FaceSwapStatus.INIT
         }
         return false

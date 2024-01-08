@@ -4,6 +4,7 @@ import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpda
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteBotDataPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component
 class BottomTextHandler(
     private val telegramMessagePort: TelegramMessagePort,
     private val getBotDataPort: GetBotDataPort,
+    private val findBotDataPort: FindBotDataPort,
     private val createStickerUseCase: CreateStickerUseCase,
     private val deleteBotDataPort: DeleteBotDataPort
 ) : TelegramUpdateHandler {
@@ -33,8 +35,8 @@ class BottomTextHandler(
 
     override fun canApply(update: TelegramUpdateMessage): Boolean {
         if (!update.message.isNullOrBlank()) {
-            val botData = getBotDataPort.getByChatId(update.chatId)
-            return botData.commandData.isStickerData()
+            val botData = findBotDataPort.findByChatId(update.chatId)
+            return botData?.commandData?.isStickerData() == true
                     && botData.getAsCreateStickerData().status == StickerStatus.TOP_TEXT_ADDED
         }
         return false

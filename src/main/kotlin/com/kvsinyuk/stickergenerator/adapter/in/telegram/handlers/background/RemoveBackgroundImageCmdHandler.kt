@@ -3,7 +3,7 @@ package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.background
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.RemoveBackgroundUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteBotDataPort
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramFilePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component
 class RemoveBackgroundImageCmdHandler(
     private val telegramMessagePort: TelegramMessagePort,
     private val telegramFilePort: TelegramFilePort,
-    private val getBotDataPort: GetBotDataPort,
+    private val findBotDataPort: FindBotDataPort,
     private val deleteBotDataPort: DeleteBotDataPort,
     private val removeBackgroundUseCase: RemoveBackgroundUseCase
 ) : TelegramUpdateHandler {
@@ -28,6 +28,6 @@ class RemoveBackgroundImageCmdHandler(
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.document != null && getBotDataPort.getByChatId(update.chatId).commandData
-            .isStickerData()
+        update.document != null &&
+                findBotDataPort.findByChatId(update.chatId)?.commandData?.isStickerData() == true
 }
