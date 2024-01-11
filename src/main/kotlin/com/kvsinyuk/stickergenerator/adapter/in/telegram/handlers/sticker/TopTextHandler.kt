@@ -1,7 +1,6 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.sticker
 
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
-import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
@@ -15,8 +14,7 @@ class TopTextHandler(
     private val telegramMessagePort: TelegramMessagePort,
     private val getBotDataPort: GetBotDataPort,
     private val findBotDataPort: FindBotDataPort,
-    private val saveBotDataPort: SaveBotDataPort,
-    private val messagePort: MessageSourcePort
+    private val saveBotDataPort: SaveBotDataPort
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         val botData = getBotDataPort.getByChatId(update.chatId)
@@ -26,10 +24,7 @@ class TopTextHandler(
                 topText = update.message.takeIf { it != "*" } ?: ""
             }
         saveBotDataPort.save(botData)
-        telegramMessagePort.sendMessageByCode(
-            update.chatId,
-            messagePort.getMessage("command.mk-sticker.top-text-added.response")
-        )
+        telegramMessagePort.sendMessageByCode(update.chatId, "command.mk-sticker.top-text-added.response")
     }
 
     override fun canApply(update: TelegramUpdateMessage): Boolean {
