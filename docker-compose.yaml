@@ -21,13 +21,13 @@ services:
       - MONGO_INITDB_DATABASE=stickers
     ports:
       - 27017:27017
-  sticker-generator:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - BG_REMOVAL_BASE_URL=http://bg-removal:5000
-    ports:
-      - 8080:8080
-    depends_on:
-      - bg-removal
+#  sticker-generator:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    environment:
+#      - BG_REMOVAL_BASE_URL=http://bg-removal:5000
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - bg-removal

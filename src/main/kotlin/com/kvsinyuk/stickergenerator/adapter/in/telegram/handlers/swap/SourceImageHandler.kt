@@ -33,7 +33,7 @@ class SourceImageHandler(
         saveStickerDataUseCase.save(botData)
 
         val responseMsg = messagePort.getMessage("command.face-swap.source.response")
-        telegramMessagePort.sendMessage(update.chatId, responseMsg)
+        telegramMessagePort.sendMessageByCode(update.chatId, responseMsg)
     }
 
     override fun canApply(update: TelegramUpdateMessage): Boolean {

@@ -1,22 +1,19 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.common
 
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
-import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
+import com.kvsinyuk.stickergenerator.domain.BotCommand
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
-import com.kvsinyuk.stickergenerator.utils.Commands.HELP_CMD
 import org.springframework.stereotype.Component
 
 @Component
 class HelpCmdHandler(
-    private val telegramMessagePort: TelegramMessagePort,
-    private val messagePort: MessageSourcePort
+    private val telegramMessagePort: TelegramMessagePort
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        val responseMsg = messagePort.getMessage("command.help.response")
-        telegramMessagePort.sendMessage(update.chatId, responseMsg)
+        telegramMessagePort.sendMessageByCode(update.chatId, "command.help.response")
     }
 
     override fun canApply(update: TelegramUpdateMessage): Boolean =
-        update.message == HELP_CMD
+        update.message == BotCommand.HELP.command
 }
