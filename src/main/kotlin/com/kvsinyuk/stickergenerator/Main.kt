@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class StickerGeneratorApplication
 
 fun main(args: Array<String>) {
-	runApplication<StickerGeneratorApplication>(*args)
+    runApplication<StickerGeneratorApplication>(*args)
 }

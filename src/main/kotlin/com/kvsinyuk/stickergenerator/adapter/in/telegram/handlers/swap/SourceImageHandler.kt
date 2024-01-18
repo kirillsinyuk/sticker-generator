@@ -17,9 +17,8 @@ class SourceImageHandler(
     private val saveStickerDataUseCase: SaveStickerDataUseCase,
     private val getBotDataPort: GetBotDataPort,
     private val findBotDataPort: FindBotDataPort,
-    private val telegramFilePort: TelegramFilePort
+    private val telegramFilePort: TelegramFilePort,
 ) : TelegramUpdateHandler {
-
     override fun process(update: TelegramUpdateMessage) {
         val botData = getBotDataPort.getByChatId(update.chatId)
         val file = telegramFilePort.getFileContent(update.document!!.fileId())
@@ -36,8 +35,8 @@ class SourceImageHandler(
     override fun canApply(update: TelegramUpdateMessage): Boolean {
         if (update.document != null) {
             val botData = findBotDataPort.findByChatId(update.chatId)
-            return botData?.commandData?.isFaceSwapData() == true
-                    && botData.getAsFaceSwapData().status == FaceSwapStatus.INIT
+            return botData?.commandData?.isFaceSwapData() == true &&
+                botData.getAsFaceSwapData().status == FaceSwapStatus.INIT
         }
         return false
     }

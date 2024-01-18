@@ -7,9 +7,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class GetBotDataPortImpl(
-    private val stickerDataRepository: StickerDataRepository
+    private val stickerDataRepository: StickerDataRepository,
 ) : GetBotDataPort {
-
     override fun getByChatId(chatId: Long) =
         stickerDataRepository.findByChatId(chatId)
             ?: throw DataNotFoundException(chatId)

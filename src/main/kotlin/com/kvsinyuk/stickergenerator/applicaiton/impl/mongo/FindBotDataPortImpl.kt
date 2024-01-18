@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class FindBotDataPortImpl(
-    private val stickerDataRepository: StickerDataRepository
+    private val stickerDataRepository: StickerDataRepository,
 ) : FindBotDataPort {
-
-    override fun findByChatId(chatId: Long) =
-        stickerDataRepository.findByChatId(chatId)
+    override fun findByChatId(chatId: Long) = stickerDataRepository.findByChatId(chatId)
 }

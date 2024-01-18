@@ -8,9 +8,8 @@ data class CreateStickerData(
     var status: StickerStatus = StickerStatus.INIT,
     var originalFilename: String = "result.png",
     var topText: String = "",
-    var bottomText: String = ""
-): CommandData() {
-
+    var bottomText: String = "",
+) : CommandData() {
     var image: ByteArray? = null
 
     override fun isStickerData() = true

@@ -12,5 +12,5 @@ data class FaceSwapRequest(
     @JsonProperty("target_type")
     val targetType: String, // target file type
     @JsonProperty("frame_processors")
-    val frameProcessors: List<String> = listOf("face_swapper") // constant value of processor
+    val frameProcessors: List<String> = listOf("face_swapper"), // constant value of processor
 )

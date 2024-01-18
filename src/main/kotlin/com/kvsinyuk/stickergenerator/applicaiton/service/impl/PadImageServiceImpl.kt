@@ -8,10 +8,12 @@ import java.awt.image.BufferedImage
 @Service
 class PadImageServiceImpl(
     @Value("\${sticker.topPaddingPercent}")
-    private val topPaddingPercent: Int
+    private val topPaddingPercent: Int,
 ) : PadImageService {
-
-    override fun addPaddingIfNecessary(image: BufferedImage, hasTopText: Boolean): BufferedImage {
+    override fun addPaddingIfNecessary(
+        image: BufferedImage,
+        hasTopText: Boolean,
+    ): BufferedImage {
         if (!hasTopText) {
             return image
         }
@@ -19,7 +21,10 @@ class PadImageServiceImpl(
         return addTopPadding(image, topPaddingPixels)
     }
 
-    private fun addTopPadding(image: BufferedImage, padding: Int): BufferedImage {
+    private fun addTopPadding(
+        image: BufferedImage,
+        padding: Int,
+    ): BufferedImage {
         val paddedImage = BufferedImage(image.width, image.height + padding, image.type)
         paddedImage.graphics
             .also { it.drawImage(image, 0, padding, null) }

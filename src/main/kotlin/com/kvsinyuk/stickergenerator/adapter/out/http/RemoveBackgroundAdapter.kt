@@ -15,13 +15,15 @@ import java.awt.image.BufferedImage
 
 @Component
 class RemoveBackgroundAdapter(
-    private val client: OkHttpClient
-): RemoveBackgroundPort {
-
+    private val client: OkHttpClient,
+) : RemoveBackgroundPort {
     @Value("\${http.bg-removal.base-url}")
     private lateinit var backgroundRemoveBaseUrl: String
 
-    override fun removeBackground(image: BufferedImage, originalFilename: String): BufferedImage {
+    override fun removeBackground(
+        image: BufferedImage,
+        originalFilename: String,
+    ): BufferedImage {
         val response = callForBackgroundRemove(image, originalFilename)
         return response.body?.bytes()
             ?.getBufferedImage()
@@ -31,23 +33,28 @@ class RemoveBackgroundAdapter(
             }
     }
 
-    private fun callForBackgroundRemove(image: BufferedImage, originalFilename: String): Response {
-        val request: Request = Request.Builder()
-            .url("$backgroundRemoveBaseUrl/api/remove")
-            .post(
-                MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(
-                        "file",
-                        originalFilename,
-                        image.mapToByteArray().toRequestBody())
-                    .build()
-            )
-            .build()
+    private fun callForBackgroundRemove(
+        image: BufferedImage,
+        originalFilename: String,
+    ): Response {
+        val request: Request =
+            Request.Builder()
+                .url("$backgroundRemoveBaseUrl/api/remove")
+                .post(
+                    MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart(
+                            "file",
+                            originalFilename,
+                            image.mapToByteArray().toRequestBody(),
+                        )
+                        .build(),
+                )
+                .build()
 
         return client.newCall(request)
             .execute()
     }
 
-    companion object: KLogging()
+    companion object : KLogging()
 }

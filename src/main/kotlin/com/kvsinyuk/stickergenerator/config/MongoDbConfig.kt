@@ -7,7 +7,6 @@ import com.mongodb.ConnectionString
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.mongo.MongoProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
@@ -24,34 +23,35 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext
 @Configuration
 @EnableConfigurationProperties(MongoProperties::class)
 class MongoDbConfig(
-    private val mongoProperties: MongoProperties
-): AbstractMongoClientConfiguration() {
-
+    private val mongoProperties: MongoProperties,
+) : AbstractMongoClientConfiguration() {
     override fun getDatabaseName(): String {
         return mongoProperties.database
     }
 
     override fun mongoClient(): MongoClient {
         val connectionString = ConnectionString(mongoProperties.uri)
-        val mongoClientSettings = MongoClientSettings.builder()
-            .applyConnectionString(connectionString)
-            .build()
+        val mongoClientSettings =
+            MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .build()
         return MongoClients.create(mongoClientSettings)
     }
 
     @Bean
-    fun configurableTypeInformationMapper() = ConfigurableTypeInformationMapper(
-        mapOf(
-            CreateStickerData::class.java to "create_sticker",
-            FaceSwapData::class.java to "face_swap",
-            RemoveBackgroundData::class.java to "remove_background"
+    fun configurableTypeInformationMapper() =
+        ConfigurableTypeInformationMapper(
+            mapOf(
+                CreateStickerData::class.java to "create_sticker",
+                FaceSwapData::class.java to "face_swap",
+                RemoveBackgroundData::class.java to "remove_background",
+            ),
         )
-    )
 
     override fun mappingMongoConverter(
         databaseFactory: MongoDatabaseFactory,
         customConversions: MongoCustomConversions,
-        mappingContext: MongoMappingContext
+        mappingContext: MongoMappingContext,
     ) = super.mappingMongoConverter(databaseFactory, customConversions, mappingContext).apply {
         setTypeMapper(
             DefaultMongoTypeMapper(
@@ -59,8 +59,8 @@ class MongoDbConfig(
                 listOf(
                     configurableTypeInformationMapper(),
                     SimpleTypeInformationMapper(),
-                )
-            )
+                ),
+            ),
         )
     }
 }

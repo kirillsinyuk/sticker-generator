@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.telegram
 
-import com.kvsinyuk.stickergenerator.adapter.mapper.TelegramUpdateMessageMapper
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
+import com.kvsinyuk.stickergenerator.adapter.mapper.TelegramUpdateMessageMapper
 import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.UpdatesListener
 import com.pengrad.telegrambot.model.Update
@@ -13,9 +13,8 @@ import org.springframework.stereotype.Component
 class BotUpdatesListener(
     private val bot: TelegramBot,
     private val telegramUpdateHandlers: List<TelegramUpdateHandler>,
-    private val telegramUpdateMessageMapper: TelegramUpdateMessageMapper
+    private val telegramUpdateMessageMapper: TelegramUpdateMessageMapper,
 ) : UpdatesListener {
-
     @PostConstruct
     fun init() {
         bot.setUpdatesListener(this)

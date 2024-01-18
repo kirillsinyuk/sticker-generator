@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class StartCmdHandler(
     private val setMenuPort: TelegramSetMenuPort,
     private val telegramMessagePort: TelegramMessagePort,
-    private val deleteBotDataPort: DeleteBotDataPort
+    private val deleteBotDataPort: DeleteBotDataPort,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         deleteBotDataPort.delete(update.chatId)
@@ -22,6 +22,5 @@ class StartCmdHandler(
         telegramMessagePort.sendMessageByCode(update.chatId, "command.start.response")
     }
 
-    override fun canApply(update: TelegramUpdateMessage) =
-        update.message == BotCommand.START.command
+    override fun canApply(update: TelegramUpdateMessage) = update.message == BotCommand.START.command
 }

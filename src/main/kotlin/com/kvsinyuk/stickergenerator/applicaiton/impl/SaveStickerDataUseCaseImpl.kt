@@ -7,9 +7,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class SaveStickerDataUseCaseImpl(
-    private val saveBotDataPort: SaveBotDataPort
+    private val saveBotDataPort: SaveBotDataPort,
 ) : SaveStickerDataUseCase {
-
     override fun save(data: BotData): BotData {
         return saveBotDataPort.save(data)
     }

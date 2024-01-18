@@ -16,9 +16,8 @@ class ImageHandler(
     private val telegramMessagePort: TelegramMessagePort,
     private val getBotDataPort: GetBotDataPort,
     private val findBotDataPort: FindBotDataPort,
-    private val saveStickerDataUseCase: SaveStickerDataUseCase
+    private val saveStickerDataUseCase: SaveStickerDataUseCase,
 ) : TelegramUpdateHandler {
-
     override fun process(update: TelegramUpdateMessage) {
         val botData = getBotDataPort.getByChatId(update.chatId)
         val file = telegramFilePort.getFileContent(update.document!!.fileId())
@@ -33,6 +32,6 @@ class ImageHandler(
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.document != null
-                && findBotDataPort.findByChatId(update.chatId)?.commandData?.isStickerData() == true
+        update.document != null &&
+            findBotDataPort.findByChatId(update.chatId)?.commandData?.isStickerData() == true
 }

@@ -21,12 +21,12 @@ class TargetImageHandler(
     private val telegramFilePort: TelegramFilePort,
     private val faceSwapPort: FaceSwapPort,
 ) : TelegramUpdateHandler {
-
     override fun process(update: TelegramUpdateMessage) {
         val file = telegramFilePort.getFileContent(update.document!!.fileId())
-        val faceSwapData = getBotDataPort.getByChatId(update.chatId)
-            .getAsFaceSwapData()
-            .apply { targetImage = Image(file, update.document.fileName()) }
+        val faceSwapData =
+            getBotDataPort.getByChatId(update.chatId)
+                .getAsFaceSwapData()
+                .apply { targetImage = Image(file, update.document.fileName()) }
 
         val resultImage = faceSwapPort.swapFace(update.chatId, faceSwapData.sourceImage, faceSwapData.targetImage)
         telegramMessagePort.sendDocument(update.chatId, resultImage, faceSwapData.targetImage.fileName)
@@ -36,8 +36,8 @@ class TargetImageHandler(
     override fun canApply(update: TelegramUpdateMessage): Boolean {
         if (update.document != null) {
             val botData = findBotDataPort.findByChatId(update.chatId)
-            return botData?.commandData?.isFaceSwapData() == true
-                    && botData.getAsFaceSwapData().status == FaceSwapStatus.SOURCE_FILE_ADDED
+            return botData?.commandData?.isFaceSwapData() == true &&
+                botData.getAsFaceSwapData().status == FaceSwapStatus.SOURCE_FILE_ADDED
         }
         return false
     }

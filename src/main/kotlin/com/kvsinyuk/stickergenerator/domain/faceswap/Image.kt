@@ -2,7 +2,7 @@ package com.kvsinyuk.stickergenerator.domain.faceswap
 
 data class Image(
     val image: ByteArray,
-    val fileName: String
+    val fileName: String,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

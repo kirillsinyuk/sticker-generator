@@ -7,9 +7,9 @@ import java.time.Duration
 
 @Configuration
 class HttpClientConfiguration {
-
     @Bean
-    fun httpClient() = OkHttpClient.Builder()
-        .writeTimeout(Duration.ofSeconds(5))
-        .build()
+    fun httpClient() =
+        OkHttpClient.Builder()
+            .writeTimeout(Duration.ofSeconds(5))
+            .build()
 }

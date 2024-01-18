@@ -12,13 +12,12 @@ import org.springframework.stereotype.Component
 @Component
 class RemoveBackgroundCmdHandler(
     private val telegramMessagePort: TelegramMessagePort,
-    private val saveStickerDataUseCase: SaveStickerDataUseCase
+    private val saveStickerDataUseCase: SaveStickerDataUseCase,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         saveStickerDataUseCase.save(BotData(update.chatId, RemoveBackgroundData()))
         telegramMessagePort.sendMessageByCode(update.chatId, "command.remove-background.response")
     }
 
-    override fun canApply(update: TelegramUpdateMessage) =
-        update.message == BotCommand.REMOVE_BACKGROUND.command
+    override fun canApply(update: TelegramUpdateMessage) = update.message == BotCommand.REMOVE_BACKGROUND.command
 }

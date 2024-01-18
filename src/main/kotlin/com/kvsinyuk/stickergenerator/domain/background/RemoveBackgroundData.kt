@@ -6,8 +6,7 @@ import org.springframework.data.annotation.TypeAlias
 @TypeAlias("remove_background")
 data class RemoveBackgroundData(
     val status: RemoveBackgroundStatus = RemoveBackgroundStatus.INIT,
-    var originalFilename: String = "result.png"
-): CommandData() {
-
+    var originalFilename: String = "result.png",
+) : CommandData() {
     var sourceImage: ByteArray? = null
 }

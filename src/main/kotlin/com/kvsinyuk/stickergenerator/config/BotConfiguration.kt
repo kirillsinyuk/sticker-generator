@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class BotConfiguration {
-
     @Value("\${bot.token}")
     private lateinit var token: String
 

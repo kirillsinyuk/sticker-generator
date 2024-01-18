@@ -9,12 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class BotData(
     @Id
     val chatId: Long,
-    var commandData: CommandData
+    var commandData: CommandData,
 ) {
+    fun getAsCreateStickerData() = commandData as CreateStickerData
 
-    fun getAsCreateStickerData() =
-        commandData as CreateStickerData
-
-    fun getAsFaceSwapData() =
-        commandData as FaceSwapData
+    fun getAsFaceSwapData() = commandData as FaceSwapData
 }

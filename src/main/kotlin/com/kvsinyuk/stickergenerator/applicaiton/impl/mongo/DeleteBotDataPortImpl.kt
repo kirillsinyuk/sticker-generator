@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class DeleteBotDataPortImpl(
-    private val stickerDataRepository: StickerDataRepository
+    private val stickerDataRepository: StickerDataRepository,
 ) : DeleteBotDataPort {
-
-    override fun delete(chatId: Long) =
-        stickerDataRepository.deleteById(chatId)
+    override fun delete(chatId: Long) = stickerDataRepository.deleteById(chatId)
 }
