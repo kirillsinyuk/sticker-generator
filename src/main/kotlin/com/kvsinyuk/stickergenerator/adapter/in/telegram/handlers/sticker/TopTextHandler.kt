@@ -2,9 +2,9 @@ package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.sticker
 
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.SaveBotDataPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 import com.kvsinyuk.stickergenerator.domain.sticker.StickerStatus
 import org.springframework.stereotype.Component
@@ -14,7 +14,7 @@ class TopTextHandler(
     private val telegramMessagePort: TelegramMessagePort,
     private val getBotDataPort: GetBotDataPort,
     private val findBotDataPort: FindBotDataPort,
-    private val saveBotDataPort: SaveBotDataPort
+    private val saveBotDataPort: SaveBotDataPort,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         val botData = getBotDataPort.getByChatId(update.chatId)
@@ -30,8 +30,8 @@ class TopTextHandler(
     override fun canApply(update: TelegramUpdateMessage): Boolean {
         if (!update.message.isNullOrBlank()) {
             val botData = findBotDataPort.findByChatId(update.chatId)
-            return botData?.commandData?.isStickerData() == true
-                    && botData.getAsCreateStickerData().status == StickerStatus.SOURCE_FILE_ADDED
+            return botData?.commandData?.isStickerData() == true &&
+                botData.getAsCreateStickerData().status == StickerStatus.SOURCE_FILE_ADDED
         }
         return false
     }

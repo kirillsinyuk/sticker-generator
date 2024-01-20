@@ -7,9 +7,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class TelegramFileAdapter(
-    private val bot: TelegramBot
+    private val bot: TelegramBot,
 ) : TelegramFilePort {
-
     override fun getFileContent(fileId: String): ByteArray {
         return bot.execute(GetFile(fileId))
             .let { bot.getFileContent(it.file()) }

@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage
 import java.awt.image.Raster
 
 @Service
-class CropImageServiceImpl: CropImageService {
-
-    override fun cropImage(image: BufferedImage) =
-        crop(image)
+class CropImageServiceImpl : CropImageService {
+    override fun cropImage(image: BufferedImage) = crop(image)
 
     private fun crop(image: BufferedImage): BufferedImage {
-        var minY = 0; var maxY = 0
-        var minX = Int.MAX_VALUE; var maxX = 0
+        var minY = 0
+        var maxY = 0
+        var minX = Int.MAX_VALUE
+        var maxX = 0
         var isBlank: Boolean
         var minYIsDefined = false
         val raster: Raster = image.raster

@@ -15,23 +15,24 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/stickers")
 class StickerController(
-    private val createStickerUseCase: CreateStickerUseCase
+    private val createStickerUseCase: CreateStickerUseCase,
 ) {
-
     @PostMapping(produces = [MediaType.IMAGE_PNG_VALUE])
     fun createSticker(
         @RequestParam("file") file: MultipartFile,
         @RequestParam("topText") topText: String = "",
-        @RequestParam("bottomText") bottomText: String = ""
+        @RequestParam("bottomText") bottomText: String = "",
     ): ByteArray {
         logger.info { "Received image ${file.originalFilename} with size ${file.size}" }
-        val image = BotData(
-            1,
-            CreateStickerData(topText = topText, bottomText = bottomText)
-                .apply { image = file.bytes })
+        val image =
+            BotData(
+                1,
+                CreateStickerData(topText = topText, bottomText = bottomText)
+                    .apply { image = file.bytes },
+            )
         return createStickerUseCase.createSticker(image)
             .mapToByteArray()
     }
 
-    companion object: KLogging()
+    companion object : KLogging()
 }

@@ -8,12 +8,11 @@ import org.springframework.stereotype.Component
 
 @Component
 class HelpCmdHandler(
-    private val telegramMessagePort: TelegramMessagePort
+    private val telegramMessagePort: TelegramMessagePort,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         telegramMessagePort.sendMessageByCode(update.chatId, "command.help.response")
     }
 
-    override fun canApply(update: TelegramUpdateMessage): Boolean =
-        update.message == BotCommand.HELP.command
+    override fun canApply(update: TelegramUpdateMessage): Boolean = update.message == BotCommand.HELP.command
 }

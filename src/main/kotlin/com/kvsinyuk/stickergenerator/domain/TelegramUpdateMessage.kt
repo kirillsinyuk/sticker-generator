@@ -7,5 +7,5 @@ data class TelegramUpdateMessage(
     val message: String?,
     val chatId: Long,
     val document: Document?,
-    val photos: Array<PhotoSize>?
+    val photos: Array<PhotoSize>?,
 )

@@ -7,9 +7,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class SaveBotDataPortImpl(
-    private val stickerDataRepository: StickerDataRepository
+    private val stickerDataRepository: StickerDataRepository,
 ) : SaveBotDataPort {
-
-    override fun save(botData: BotData) =
-        stickerDataRepository.save(botData)
+    override fun save(botData: BotData) = stickerDataRepository.save(botData)
 }

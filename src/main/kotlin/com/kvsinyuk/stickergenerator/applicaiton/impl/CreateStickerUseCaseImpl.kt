@@ -1,13 +1,12 @@
 package com.kvsinyuk.stickergenerator.applicaiton.impl
 
+import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
 import com.kvsinyuk.stickergenerator.applicaiton.service.AddTextService
 import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
 import com.kvsinyuk.stickergenerator.applicaiton.service.ResizeImageService
-import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
-import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
 import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
-import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.BotData
 import org.springframework.stereotype.Component
 import java.awt.image.BufferedImage
@@ -18,9 +17,8 @@ class CreateStickerUseCaseImpl(
     private val cropImageService: CropImageService,
     private val resizeImageService: ResizeImageService,
     private val addTextService: AddTextService,
-    private val padImageService: PadImageService
+    private val padImageService: PadImageService,
 ) : CreateStickerUseCase {
-
     override fun createSticker(botData: BotData): BufferedImage {
         val stickerData = botData.getAsCreateStickerData()
         return removeBackgroundPort.removeBackground(stickerData.image!!.getBufferedImage(), stickerData.originalFilename)

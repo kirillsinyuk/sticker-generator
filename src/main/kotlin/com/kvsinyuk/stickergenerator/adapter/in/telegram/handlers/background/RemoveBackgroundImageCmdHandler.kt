@@ -17,17 +17,18 @@ class RemoveBackgroundImageCmdHandler(
     private val telegramFilePort: TelegramFilePort,
     private val findBotDataPort: FindBotDataPort,
     private val deleteBotDataPort: DeleteBotDataPort,
-    private val removeBackgroundUseCase: RemoveBackgroundUseCase
+    private val removeBackgroundUseCase: RemoveBackgroundUseCase,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        val cleanImage = telegramFilePort.getFileContent(update.document!!.fileId())
-            .let { removeBackgroundUseCase.removeBackground(it.getBufferedImage(), update.document.fileName()) }
-            .also { deleteBotDataPort.delete(update.chatId) }
+        val cleanImage =
+            telegramFilePort.getFileContent(update.document!!.fileId())
+                .let { removeBackgroundUseCase.removeBackground(it.getBufferedImage(), update.document.fileName()) }
+                .also { deleteBotDataPort.delete(update.chatId) }
 
         telegramMessagePort.sendDocument(update.chatId, cleanImage.mapToByteArray(), update.document.fileName())
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
         update.document != null &&
-                findBotDataPort.findByChatId(update.chatId)?.commandData?.isStickerData() == true
+            findBotDataPort.findByChatId(update.chatId)?.commandData?.isStickerData() == true
 }

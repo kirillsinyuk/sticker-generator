@@ -14,50 +14,50 @@ import org.springframework.test.context.ActiveProfiles
 @ActiveProfiles("test")
 @SpringBootTest
 class CropImageServiceTest {
+    @Autowired
+    private lateinit var cropImageService: CropImageService
 
-	@Autowired
-	private lateinit var cropImageService: CropImageService
+    @Autowired
+    private lateinit var padImageService: PadImageService
 
-	@Autowired
-	private lateinit var padImageService: PadImageService
+    private val examplePath = "/images/carImage.png"
 
-	private val examplePath = "/images/carImage.png"
+    @Test
+    fun cropImageTest() {
+        // given
+        val imageUrl = javaClass.getResource(examplePath)
+        val botData =
+            BotData(
+                1,
+                CreateStickerData(StickerStatus.INIT, imageUrl.file, "", "")
+                    .apply { image = imageUrl.readBytes() },
+            )
 
-	@Test
-	fun cropImageTest() {
-		// given
-		val imageUrl = javaClass.getResource(examplePath)
-		val botData = BotData(
-			1,
-			CreateStickerData(StickerStatus.INIT, imageUrl.file, "", "")
-				.apply { image = imageUrl.readBytes() }
-		)
+        // when
+        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
 
-		// when
-		val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
+        // then
+        assert(croppedImage.height == 228)
+        assert(croppedImage.width == 427)
+    }
 
-		// then
-		assert(croppedImage.height == 228)
-		assert(croppedImage.width == 427)
-	}
+    @Test
+    fun cropImageWithPaddingTest() {
+        // given
+        val imageUrl = javaClass.getResource(examplePath)
+        val botData =
+            BotData(
+                1,
+                CreateStickerData(StickerStatus.INIT, imageUrl.file, "test text", "")
+                    .apply { image = imageUrl.readBytes() },
+            )
 
-	@Test
-	fun cropImageWithPaddingTest() {
-		// given
-		val imageUrl = javaClass.getResource(examplePath)
-		val botData = BotData(
-			1,
-			CreateStickerData(StickerStatus.INIT, imageUrl.file, "test text", "")
-				.apply { image = imageUrl.readBytes() }
-		)
+        // when
+        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
+        val paddedImage = padImageService.addPaddingIfNecessary(croppedImage, true)
 
-		// when
-		val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
-		val paddedImage = padImageService.addPaddingIfNecessary(croppedImage, true)
-
-		// then
-		assert(croppedImage.width == paddedImage.width)
-		assert(croppedImage.height < paddedImage.height)
-	}
-
+        // then
+        assert(croppedImage.width == paddedImage.width)
+        assert(croppedImage.height < paddedImage.height)
+    }
 }

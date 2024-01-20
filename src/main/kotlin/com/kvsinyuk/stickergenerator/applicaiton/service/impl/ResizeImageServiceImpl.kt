@@ -10,19 +10,21 @@ import kotlin.math.roundToInt
 @Service
 class ResizeImageServiceImpl(
     @Value("\${sticker.maxPixelSize}")
-    private val maxDesiredSize: Int
+    private val maxDesiredSize: Int,
 ) : ResizeImageService {
-
     override fun resizeBufferedImage(image: BufferedImage): BufferedImage {
         val scaleFactor = getScaleFactor(image.width, image.height)
         return Resizer.PROGRESSIVE_BILINEAR.resize(
             image,
             image.width.times(scaleFactor).roundToInt(),
-            image.height.times(scaleFactor).roundToInt()
+            image.height.times(scaleFactor).roundToInt(),
         )
     }
 
-    private fun getScaleFactor(originalWidth: Int, originalHeight: Int): Float {
+    private fun getScaleFactor(
+        originalWidth: Int,
+        originalHeight: Int,
+    ): Float {
         val max = originalHeight.coerceAtLeast(originalWidth).toFloat()
         return maxDesiredSize.div(max)
     }

@@ -9,8 +9,10 @@ import java.awt.image.BufferedImage
 class RemoveBackgroundUseCaseImpl(
     private val removeBackgroundPort: RemoveBackgroundPort,
 ) : RemoveBackgroundUseCase {
-
-    override fun removeBackground(image: BufferedImage, originalFilename: String): BufferedImage {
+    override fun removeBackground(
+        image: BufferedImage,
+        originalFilename: String,
+    ): BufferedImage {
         return removeBackgroundPort.removeBackground(image, originalFilename)
     }
 }
