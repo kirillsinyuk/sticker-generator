@@ -9,22 +9,54 @@
 
 === Common info
 
-This service implements handlers for Telegram bot for easy stickers creation.
+This service implements handlers for Telegram bot for easy stickers creation and other useful services to work with images.
 The main platform for this service is Telegram, because it`s an easiest way to provide UI for interaction.
 Maybe once there will be a webpage or API, but not in near future.
 
-Currently, the core features are:
-* Remove picture background(it`s not perfect, so keep that in mind);
+=== Features
+
+==== Create sticker (/mksticker)
+
+This feature has all steps to make a telegram sticker such as:
+
+* Remove image background(it`s not perfect, so keep that in mind);
 * Crop empty space;
 * Resize image to sticker size(at least one side should be exactly 512px);
 * Add top and bottom text(in case of adding top text 15% top padding will be added as well);
 
 Basically the result is something like this:
 
-[cols="a,a", frame=none, role="center"]
+[cols="a,a", role="center"]
 |===
-| image::example-img-before.png[]
-| image::example-img-after.png[]
+| Source | Result
+
+| image::example-sticker-before.png[width=250]
+| image::example-sticker-after.png[]
+|===
+
+After that you can use https://t.me/Stickers to add sticker to stickerpack or create a new one.
+
+==== Swap face (/swapface)
+
+This feature allows to put face from one image to another
+
+[cols="a,a,a", role="center"]
+|===
+| Source | Target | Result
+
+| image::example-face-swap-source.png[width=250]
+| image::example-face-swap-target.png[width=250]
+| image::example-face-swap-result.png[width=250]
+|===
+
+==== Remove background (/rmbackground)
+
+[cols="a,a", role="center"]
+|===
+| Source | Result
+
+| image::example-background-removal-source.png[width=250]
+| image::example-background-removal-result.png[width=250]
 |===
 
 === Local run
