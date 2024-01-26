@@ -23,13 +23,11 @@ class StickerController(
         @RequestParam("topText") topText: String = "",
         @RequestParam("bottomText") bottomText: String = "",
     ): ByteArray {
-        logger.info { "Received image ${file.originalFilename} with size ${file.size}" }
+        logger.info { "Creating sticker for image ${file.originalFilename}" }
         val image =
-            BotData(
-                1,
-                CreateStickerData(topText = topText, bottomText = bottomText)
-                    .apply { image = file.bytes },
-            )
+            CreateStickerData(topText = topText, bottomText = bottomText)
+                .apply { image = file.bytes }
+                .let { BotData(1, it) }
         return createStickerUseCase.createSticker(image)
             .mapToByteArray()
     }
