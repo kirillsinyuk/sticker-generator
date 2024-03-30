@@ -4,6 +4,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundP
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramFilePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
+import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import org.springframework.stereotype.Component
@@ -21,6 +22,7 @@ interface RemoveBackgroundUseCase {
 @Component
 class RemoveBackgroundUseCaseImpl(
     private val removeBackgroundPort: RemoveBackgroundPort,
+    private val cropImageService: CropImageService,
     private val telegramMessagePort: TelegramMessagePort,
     private val telegramFilePort: TelegramFilePort,
     private val deleteBotDataPort: DeleteBotDataPort,
@@ -29,6 +31,7 @@ class RemoveBackgroundUseCaseImpl(
         val cleanImage =
             telegramFilePort.getFileContent(command.fileId)
                 .let { removeBackgroundPort.removeBackground(it.getBufferedImage(), command.originalFilename) }
+                .let { cropImageService.cropImage(it) }
                 .also { deleteBotDataPort.delete(command.chatId) }
 
         telegramMessagePort.sendDocument(command.chatId, cleanImage.mapToByteArray(), command.originalFilename)
