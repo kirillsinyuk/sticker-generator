@@ -14,5 +14,5 @@ class HelpCmdHandler(
         telegramMessagePort.sendMessageByCode(update.chatId, "command.help.response")
     }
 
-    override fun canApply(update: TelegramUpdateMessage): Boolean = update.message == BotCommand.HELP.command
+    override fun canApply(update: TelegramUpdateMessage) = update.message == BotCommand.HELP.command
 }

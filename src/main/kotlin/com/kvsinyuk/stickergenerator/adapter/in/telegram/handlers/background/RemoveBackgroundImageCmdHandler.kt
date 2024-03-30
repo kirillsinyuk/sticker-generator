@@ -21,5 +21,5 @@ class RemoveBackgroundImageCmdHandler(
 
     override fun canApply(update: TelegramUpdateMessage) =
         update.document != null &&
-            findBotDataPort.findByChatId(update.chatId)?.commandData?.isRemoveBackgroundData() == true
+            findBotDataPort.findByChatId(update.chatId)?.isRemoveBackgroundData() == true
 }

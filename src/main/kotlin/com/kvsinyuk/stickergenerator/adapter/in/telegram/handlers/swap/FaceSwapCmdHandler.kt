@@ -3,7 +3,7 @@ package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.swap
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.SaveStickerDataUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
-import com.kvsinyuk.stickergenerator.domain.BotCommand
+import com.kvsinyuk.stickergenerator.domain.BotCommand.FACE_SWAP
 import com.kvsinyuk.stickergenerator.domain.BotData
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapData
@@ -19,5 +19,5 @@ class FaceSwapCmdHandler(
         telegramMessagePort.sendMessageByCode(update.chatId, "command.face-swap.response")
     }
 
-    override fun canApply(update: TelegramUpdateMessage) = update.message == BotCommand.FACE_SWAP.command
+    override fun canApply(update: TelegramUpdateMessage) = update.message == FACE_SWAP.command
 }
