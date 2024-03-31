@@ -2,6 +2,7 @@ package com.kvsinyuk.stickergenerator.domain
 
 import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapData
 import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapStatus
+import com.kvsinyuk.stickergenerator.domain.meme.CreateMemeData
 import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
 import com.kvsinyuk.stickergenerator.domain.sticker.StickerStatus
 import org.springframework.data.annotation.Id
@@ -17,9 +18,13 @@ data class BotData(
 
     fun getAsFaceSwapData() = commandData as FaceSwapData
 
+    fun getAsCreateMemeData() = commandData as CreateMemeData
+
     fun isRemoveBackgroundData() = commandData.isRemoveBackgroundData()
 
     fun isStickerData() = commandData.isStickerData()
+
+    fun isMemeData() = commandData.isMemeData()
 
     fun isFaceSwapData() = commandData.isFaceSwapData()
 

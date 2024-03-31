@@ -6,4 +6,6 @@ abstract class CommandData {
     open fun isFaceSwapData() = false
 
     open fun isRemoveBackgroundData() = false
+
+    open fun isMemeData() = false
 }

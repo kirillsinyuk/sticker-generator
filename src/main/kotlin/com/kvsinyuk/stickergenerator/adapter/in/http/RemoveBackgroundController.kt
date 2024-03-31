@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequestMapping("/remove-background")
+@RequestMapping("/background-removals")
 class RemoveBackgroundController(
     private val removeBackgroundPort: RemoveBackgroundPort,
 ) {
