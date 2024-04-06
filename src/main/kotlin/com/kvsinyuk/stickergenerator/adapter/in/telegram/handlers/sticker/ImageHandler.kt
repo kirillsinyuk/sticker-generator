@@ -13,16 +13,12 @@ class ImageHandler(
     private val addImageUseCase: AddImageUseCase,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        addImageUseCase.addImage(
-            AddImageCommand(
-                update.chatId,
-                update.document!!.fileId(),
-                update.document.fileName(),
-            ),
-        )
+        update
+            .let { AddImageCommand(it.chatId, it.document!!.fileId(), it.document.fileName()) }
+            .also { addImageUseCase.addImage(it) }
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
         update.document != null &&
-            findBotDataPort.findByChatId(update.chatId)?.commandData?.isStickerData() == true
+            findBotDataPort.findByChatId(update.chatId)?.isStickerData() == true
 }

@@ -5,7 +5,6 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.swap.AddSour
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.swap.AddSourceImageUseCase.AddSourceImageCommand
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
-import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapStatus
 import org.springframework.stereotype.Component
 
 @Component
@@ -14,21 +13,13 @@ class SourceImageHandler(
     private val addSourceImageUseCase: AddSourceImageUseCase,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        addSourceImageUseCase.addImage(
-            AddSourceImageCommand(
-                update.chatId,
-                update.document!!.fileId(),
-                update.document.fileName(),
-            ),
-        )
+        update
+            .let { AddSourceImageCommand(it.chatId, it.document!!.fileId(), it.document.fileName()) }
+            .also { addSourceImageUseCase.addImage(it) }
     }
 
-    override fun canApply(update: TelegramUpdateMessage): Boolean {
-        if (update.document != null) {
-            val botData = findBotDataPort.findByChatId(update.chatId)
-            return botData?.commandData?.isFaceSwapData() == true &&
-                botData.getAsFaceSwapData().status == FaceSwapStatus.INIT
-        }
-        return false
-    }
+    override fun canApply(update: TelegramUpdateMessage) =
+        update.takeIf { it.document != null }
+            ?.let { findBotDataPort.findByChatId(update.chatId)?.isFaceSwapDataInit() == true }
+            ?: false
 }
