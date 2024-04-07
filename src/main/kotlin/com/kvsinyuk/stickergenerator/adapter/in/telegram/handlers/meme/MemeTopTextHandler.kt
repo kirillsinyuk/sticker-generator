@@ -1,16 +1,16 @@
-package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.sticker
+package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.meme
 
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
-import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.sticker.AddTopTextUseCase
-import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.sticker.AddTopTextUseCase.AddTopTextCommand
+import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.meme.AddMemeTopTextUseCase
+import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.meme.AddMemeTopTextUseCase.AddTopTextCommand
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 import org.springframework.stereotype.Component
 
 @Component
-class TopTextHandler(
+class MemeTopTextHandler(
     private val findBotDataPort: FindBotDataPort,
-    private val addStickerTopTextUseCase: AddTopTextUseCase,
+    private val addStickerTopTextUseCase: AddMemeTopTextUseCase,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         addStickerTopTextUseCase.addTopText(AddTopTextCommand(update.chatId, update.message!!))
