@@ -13,4 +13,25 @@ data class CreateMemeData(
     var image: ByteArray? = null
 
     override fun isMemeData() = true
+
+    fun addText(
+        text: String,
+        isTop: Boolean,
+    ) {
+        if (isTop) {
+            status = MemeStatus.TOP_TEXT_ADDED
+            topText = text.takeIf { it != "*" } ?: ""
+        } else {
+            bottomText = text.takeIf { it != "*" } ?: ""
+        }
+    }
+
+    fun addImage(
+        file: ByteArray,
+        fileName: String,
+    ) {
+        status = MemeStatus.SOURCE_FILE_ADDED
+        image = file
+        originalFilename = fileName
+    }
 }

@@ -13,4 +13,25 @@ data class CreateStickerData(
     var image: ByteArray? = null
 
     override fun isStickerData() = true
+
+    fun addText(
+        text: String,
+        isTop: Boolean,
+    ) {
+        if (isTop) {
+            status = StickerStatus.TOP_TEXT_ADDED
+            topText = text.takeIf { it != "*" } ?: ""
+        } else {
+            bottomText = text.takeIf { it != "*" } ?: ""
+        }
+    }
+
+    fun addImage(
+        file: ByteArray,
+        fileName: String,
+    ) {
+        status = StickerStatus.SOURCE_FILE_ADDED
+        image = file
+        originalFilename = fileName
+    }
 }

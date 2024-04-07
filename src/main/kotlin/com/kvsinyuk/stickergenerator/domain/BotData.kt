@@ -12,8 +12,31 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class BotData(
     @Id
     val chatId: Long,
-    var commandData: CommandData,
+    val commandData: CommandData,
 ) {
+    fun addText(
+        text: String,
+        isTop: Boolean = false,
+    ): BotData {
+        when (commandData) {
+            is CreateMemeData -> commandData.addText(text, isTop)
+            is CreateStickerData -> commandData.addText(text, isTop)
+        }
+        return this
+    }
+
+    fun addImage(
+        file: ByteArray,
+        fileName: String,
+    ): BotData {
+        when (commandData) {
+            is CreateMemeData -> commandData.addImage(file, fileName)
+            is CreateStickerData -> commandData.addImage(file, fileName)
+            is FaceSwapData -> commandData.addImage(file, fileName)
+        }
+        return this
+    }
+
     fun getAsCreateStickerData() = commandData as CreateStickerData
 
     fun getAsFaceSwapData() = commandData as FaceSwapData

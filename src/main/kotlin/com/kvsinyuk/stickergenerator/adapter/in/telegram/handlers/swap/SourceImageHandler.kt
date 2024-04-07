@@ -1,21 +1,24 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.swap
 
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
-import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.swap.AddSourceImageUseCase
-import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.swap.AddSourceImageUseCase.AddSourceImageCommand
+import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.AddImageUseCase
+import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.AddImageUseCase.AddImageCommand
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
+import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 import org.springframework.stereotype.Component
 
 @Component
 class SourceImageHandler(
     private val findBotDataPort: FindBotDataPort,
-    private val addSourceImageUseCase: AddSourceImageUseCase,
+    private val addSourceImageUseCase: AddImageUseCase,
+    private val telegramMessagePort: TelegramMessagePort,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         update
-            .let { AddSourceImageCommand(it.chatId, it.document!!.fileId(), it.document.fileName()) }
+            .let { AddImageCommand(it.chatId, it.document!!.fileId(), it.document.fileName()) }
             .also { addSourceImageUseCase.addImage(it) }
+        telegramMessagePort.sendMessageByCode(update.chatId, "command.swp-face.source.response")
     }
 
     override fun canApply(update: TelegramUpdateMessage) =

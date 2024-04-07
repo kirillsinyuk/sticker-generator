@@ -11,4 +11,22 @@ data class FaceSwapData(
     lateinit var targetImage: Image
 
     override fun isFaceSwapData() = true
+
+    fun addImage(
+        file: ByteArray,
+        fileName: String,
+    ) {
+        when (status) {
+            FaceSwapStatus.INIT -> {
+                sourceImage = Image(file, fileName)
+                status = FaceSwapStatus.SOURCE_FILE_ADDED
+            }
+
+            FaceSwapStatus.SOURCE_FILE_ADDED -> {
+                targetImage = Image(file, fileName)
+                status = FaceSwapStatus.TARGET_FILE_ADDED
+            }
+            else -> null
+        }
+    }
 }
