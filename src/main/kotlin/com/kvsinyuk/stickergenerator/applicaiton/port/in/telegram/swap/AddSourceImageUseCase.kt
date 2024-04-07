@@ -35,6 +35,6 @@ class AddSourceUseCaseImpl(
             }
         saveStickerDataUseCase.save(botData)
 
-        telegramMessagePort.sendMessageByCode(command.chatId, "command.face-swap.source.response")
+        telegramMessagePort.sendMessageByCode(command.chatId, "command.swp-face.source.response")
     }
 }

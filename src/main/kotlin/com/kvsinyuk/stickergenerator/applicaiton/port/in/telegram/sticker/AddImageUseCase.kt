@@ -34,6 +34,6 @@ class AddImageUseCaseImpl(
                 originalFilename = command.originalFilename
             }
         saveStickerDataUseCase.save(botData)
-        telegramMessagePort.sendMessageByCode(command.chatId, "command.mk-sticker.image-added.response")
+        telegramMessagePort.sendMessageByCode(command.chatId, "command.crt-meme.image-added.response")
     }
 }

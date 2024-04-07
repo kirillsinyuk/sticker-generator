@@ -15,7 +15,7 @@ Maybe once there will be a webpage or API, but not in near future.
 
 === Features
 
-==== Create sticker (/mksticker)
+==== Create sticker (/crt-sticker)
 
 This feature has all steps to make a telegram sticker such as:
 
@@ -36,7 +36,7 @@ Basically the result is something like this:
 
 After that you can use https://t.me/Stickers to add sticker to stickerpack or create a new one.
 
-==== Swap face (/swapface)
+==== Swap face (/swp-face)
 
 This feature allows to put face from one image to another
 
@@ -49,7 +49,7 @@ This feature allows to put face from one image to another
 | image::example-face-swap-result.png[width=250]
 |===
 
-==== Remove background (/rmbackground)
+==== Remove background (/rm-background)
 
 [cols="a,a", role="center"]
 |===

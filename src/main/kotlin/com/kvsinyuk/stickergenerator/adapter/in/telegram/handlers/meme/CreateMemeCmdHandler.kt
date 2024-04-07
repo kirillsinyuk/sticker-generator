@@ -16,7 +16,7 @@ class CreateMemeCmdHandler(
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         saveStickerDataUseCase.save(BotData(update.chatId, CreateMemeData()))
-        telegramMessagePort.sendMessageByCode(update.chatId, "command.mk-sticker.response")
+        telegramMessagePort.sendMessageByCode(update.chatId, "command.crt-meme.response")
     }
 
     override fun canApply(update: TelegramUpdateMessage) = update.message == BotCommand.CREATE_MEME.command
