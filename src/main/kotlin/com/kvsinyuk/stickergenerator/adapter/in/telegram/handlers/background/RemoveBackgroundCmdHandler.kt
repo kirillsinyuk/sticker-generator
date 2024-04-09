@@ -16,7 +16,7 @@ class RemoveBackgroundCmdHandler(
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         saveStickerDataUseCase.save(BotData(update.chatId, RemoveBackgroundData()))
-        telegramMessagePort.sendMessageByCode(update.chatId, "command.remove-background.response")
+        telegramMessagePort.sendMessageByCode(update.chatId, "command.rm-background.response")
     }
 
     override fun canApply(update: TelegramUpdateMessage) = update.message == REMOVE_BACKGROUND.command

@@ -16,7 +16,7 @@ class FaceSwapCmdHandler(
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         saveStickerDataUseCase.save(BotData(update.chatId, FaceSwapData()))
-        telegramMessagePort.sendMessageByCode(update.chatId, "command.face-swap.response")
+        telegramMessagePort.sendMessageByCode(update.chatId, "command.swp-face.response")
     }
 
     override fun canApply(update: TelegramUpdateMessage) = update.message == FACE_SWAP.command

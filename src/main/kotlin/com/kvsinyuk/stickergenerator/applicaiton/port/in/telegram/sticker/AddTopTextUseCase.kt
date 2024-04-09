@@ -29,6 +29,6 @@ class AddTopTextUseCaseImpl(
                 topText = command.message.takeIf { it != "*" } ?: ""
             }
         saveBotDataPort.save(botData)
-        telegramMessagePort.sendMessageByCode(command.chatId, "command.mk-sticker.top-text-added.response")
+        telegramMessagePort.sendMessageByCode(command.chatId, "command.crt-sticker.top-text-added.response")
     }
 }
