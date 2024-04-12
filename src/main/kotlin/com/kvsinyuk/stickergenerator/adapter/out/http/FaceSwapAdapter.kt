@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.kvsinyuk.stickergenerator.adapter.out.http.request.FaceSwapRequest
 import com.kvsinyuk.stickergenerator.adapter.out.http.response.FaceSwapResponse
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.FaceSwapPort
-import com.kvsinyuk.stickergenerator.domain.faceswap.Image
+import com.kvsinyuk.stickergenerator.domain.Image
 import mu.KLogging
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType

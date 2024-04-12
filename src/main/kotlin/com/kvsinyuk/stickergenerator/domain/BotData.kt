@@ -14,6 +14,22 @@ data class BotData(
     val chatId: Long,
     val commandData: CommandData,
 ) {
+    fun getTopText(): String {
+        return when (commandData) {
+            is CreateMemeData -> commandData.topText
+            is CreateStickerData -> commandData.topText
+            else -> ""
+        }
+    }
+
+    fun setImage(image: Image): BotData {
+        when (commandData) {
+            is CreateMemeData -> commandData.image = image
+            is CreateStickerData -> commandData.image = image
+        }
+        return this
+    }
+
     fun addText(
         text: String,
         isTop: Boolean = false,
@@ -40,8 +56,6 @@ data class BotData(
     fun getAsCreateStickerData() = commandData as CreateStickerData
 
     fun getAsFaceSwapData() = commandData as FaceSwapData
-
-    fun getAsCreateMemeData() = commandData as CreateMemeData
 
     fun isRemoveBackgroundData() = commandData.isRemoveBackgroundData()
 

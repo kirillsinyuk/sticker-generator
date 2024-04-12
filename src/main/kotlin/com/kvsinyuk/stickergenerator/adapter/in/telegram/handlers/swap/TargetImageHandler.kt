@@ -25,7 +25,7 @@ class TargetImageHandler(
                 .let { addTargetImageUseCase.addImage(it) }
                 .getAsFaceSwapData()
 
-        faceSwapPort.swapFace(update.chatId, botData.sourceImage, botData.targetImage)
+        faceSwapPort.swapFace(update.chatId, botData.faceImage, botData.targetImage)
             .also { telegramMessagePort.sendDocument(update.chatId, it, botData.targetImage.fileName) }
             .also { deleteBotDataPort.delete(update.chatId) }
     }

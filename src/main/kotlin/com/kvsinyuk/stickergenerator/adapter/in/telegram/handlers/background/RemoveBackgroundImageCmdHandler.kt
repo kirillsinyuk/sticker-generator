@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.background
 
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
-import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.background.RemoveBackgroundUseCase
-import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.background.RemoveBackgroundUseCase.RemoveBackgroundCommand
+import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.RemoveBackgroundUseCase
+import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.RemoveBackgroundUseCase.RemoveBackgroundCommand
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort

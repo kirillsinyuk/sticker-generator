@@ -3,6 +3,7 @@ package com.kvsinyuk.stickergenerator.adapter.`in`.http
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateStickerUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
 import com.kvsinyuk.stickergenerator.domain.BotData
+import com.kvsinyuk.stickergenerator.domain.Image
 import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
 import mu.KLogging
 import org.springframework.http.MediaType
@@ -26,7 +27,7 @@ class StickerController(
         logger.info { "Creating sticker for image ${file.originalFilename}" }
         val image =
             CreateStickerData(topText = topText, bottomText = bottomText)
-                .apply { image = file.bytes }
+                .apply { image = Image(file.bytes, file.originalFilename!!) }
                 .let { BotData(1, it) }
         return createStickerUseCase.createSticker(image)
             .mapToByteArray()

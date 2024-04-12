@@ -8,4 +8,6 @@ abstract class CommandData {
     open fun isRemoveBackgroundData() = false
 
     open fun isMemeData() = false
+
+    abstract fun getSourceImage(): Image
 }
