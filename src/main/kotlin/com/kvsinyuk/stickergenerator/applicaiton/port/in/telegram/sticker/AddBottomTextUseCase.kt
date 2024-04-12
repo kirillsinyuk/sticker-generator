@@ -16,6 +16,7 @@ interface AddBottomTextUseCase {
     )
 }
 
+// TODO refactor
 @Component
 class AddBottomTextUseCaseImpl(
     private val telegramMessagePort: TelegramMessagePort,
@@ -24,10 +25,10 @@ class AddBottomTextUseCaseImpl(
     private val deleteBotDataPort: DeleteBotDataPort,
 ) : AddBottomTextUseCase {
     override fun addBottomText(command: AddBottomTextUseCase.AddBottomTextCommand) {
-        val stickerData = getBotDataPort.getByChatId(command.chatId)
-        val createStickerData =
-            stickerData.getAsCreateStickerData()
-                .apply { bottomText = command.message.takeIf { it != "*" } ?: "" }
+        val stickerData =
+            getBotDataPort.getByChatId(command.chatId)
+                .addText(command.message)
+        val createStickerData = stickerData.getAsCreateStickerData()
 
         val stickerFile =
             stickerData
