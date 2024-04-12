@@ -1,18 +1,20 @@
 package com.kvsinyuk.stickergenerator.domain.meme
 
 import com.kvsinyuk.stickergenerator.domain.CommandData
+import com.kvsinyuk.stickergenerator.domain.Image
 import org.springframework.data.annotation.TypeAlias
 
 @TypeAlias("create_meme")
 data class CreateMemeData(
     var status: MemeStatus = MemeStatus.INIT,
-    var originalFilename: String = "result.png",
     var topText: String = "",
     var bottomText: String = "",
 ) : CommandData() {
-    var image: ByteArray? = null
+    lateinit var image: Image
 
     override fun isMemeData() = true
+
+    override fun getSourceImage() = image
 
     fun addText(
         text: String,
@@ -31,7 +33,6 @@ data class CreateMemeData(
         fileName: String,
     ) {
         status = MemeStatus.SOURCE_FILE_ADDED
-        image = file
-        originalFilename = fileName
+        image = Image(file, fileName)
     }
 }

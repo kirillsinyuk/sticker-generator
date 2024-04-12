@@ -4,6 +4,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
 import com.kvsinyuk.stickergenerator.domain.BotData
+import com.kvsinyuk.stickergenerator.domain.Image
 import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
 import com.kvsinyuk.stickergenerator.domain.sticker.StickerStatus
 import org.junit.jupiter.api.Test
@@ -29,12 +30,12 @@ class CropImageServiceTest {
         val botData =
             BotData(
                 1,
-                CreateStickerData(StickerStatus.INIT, imageUrl.file, "", "")
-                    .apply { image = imageUrl.readBytes() },
+                CreateStickerData(StickerStatus.INIT, "", "")
+                    .apply { image = Image(imageUrl.readBytes(), imageUrl.file) },
             )
 
         // when
-        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
+        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image.image.getBufferedImage())
 
         // then
         assert(croppedImage.height == 228)
@@ -48,12 +49,12 @@ class CropImageServiceTest {
         val botData =
             BotData(
                 1,
-                CreateStickerData(StickerStatus.INIT, imageUrl.file, "test text", "")
-                    .apply { image = imageUrl.readBytes() },
+                CreateStickerData(StickerStatus.INIT, "test text", "")
+                    .apply { image = Image(imageUrl.readBytes(), imageUrl.file) },
             )
 
         // when
-        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image!!.getBufferedImage())
+        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image.image.getBufferedImage())
         val paddedImage = padImageService.addPaddingIfNecessary(croppedImage, true)
 
         // then

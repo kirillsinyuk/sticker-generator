@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.background
+package com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramFilePort

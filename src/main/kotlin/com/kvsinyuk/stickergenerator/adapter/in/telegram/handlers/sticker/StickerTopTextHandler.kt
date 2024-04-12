@@ -6,11 +6,13 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.AddTopTextUs
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 
 @Component
 class StickerTopTextHandler(
     private val findBotDataPort: FindBotDataPort,
+    @Qualifier("addTopTextWithPaddingUseCaseImpl")
     private val addTopTextUseCase: AddTopTextUseCase,
     private val telegramMessagePort: TelegramMessagePort,
 ) : TelegramUpdateHandler {

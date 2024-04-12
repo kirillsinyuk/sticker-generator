@@ -1,16 +1,19 @@
 package com.kvsinyuk.stickergenerator.domain.faceswap
 
 import com.kvsinyuk.stickergenerator.domain.CommandData
+import com.kvsinyuk.stickergenerator.domain.Image
 import org.springframework.data.annotation.TypeAlias
 
 @TypeAlias("face_swap")
 data class FaceSwapData(
     var status: FaceSwapStatus = FaceSwapStatus.INIT,
 ) : CommandData() {
-    lateinit var sourceImage: Image
+    lateinit var faceImage: Image
     lateinit var targetImage: Image
 
     override fun isFaceSwapData() = true
+
+    override fun getSourceImage() = faceImage
 
     fun addImage(
         file: ByteArray,
@@ -18,7 +21,7 @@ data class FaceSwapData(
     ) {
         when (status) {
             FaceSwapStatus.INIT -> {
-                sourceImage = Image(file, fileName)
+                faceImage = Image(file, fileName)
                 status = FaceSwapStatus.SOURCE_FILE_ADDED
             }
 

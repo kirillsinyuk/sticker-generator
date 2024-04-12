@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.http
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.FaceSwapPort
-import com.kvsinyuk.stickergenerator.domain.faceswap.Image
+import com.kvsinyuk.stickergenerator.domain.Image
 import mu.KLogging
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping
