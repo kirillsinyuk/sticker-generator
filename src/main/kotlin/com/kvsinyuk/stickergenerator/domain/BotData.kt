@@ -1,10 +1,11 @@
 package com.kvsinyuk.stickergenerator.domain
 
-import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapData
-import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapStatus
-import com.kvsinyuk.stickergenerator.domain.meme.CreateMemeData
-import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
-import com.kvsinyuk.stickergenerator.domain.sticker.StickerStatus
+import com.kvsinyuk.stickergenerator.domain.command.CommandData
+import com.kvsinyuk.stickergenerator.domain.command.FaceSwapData
+import com.kvsinyuk.stickergenerator.domain.command.FaceSwapStatus
+import com.kvsinyuk.stickergenerator.domain.command.MemeData
+import com.kvsinyuk.stickergenerator.domain.command.StickerData
+import com.kvsinyuk.stickergenerator.domain.command.StickerStatus
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -16,16 +17,17 @@ data class BotData(
 ) {
     fun getTopText(): String {
         return when (commandData) {
-            is CreateMemeData -> commandData.topText
-            is CreateStickerData -> commandData.topText
+            is MemeData -> commandData.topText
+            is StickerData -> commandData.topText
             else -> ""
         }
     }
 
     fun setImage(image: Image): BotData {
         when (commandData) {
-            is CreateMemeData -> commandData.image = image
-            is CreateStickerData -> commandData.image = image
+            is MemeData -> commandData.image = image
+            is StickerData -> commandData.image = image
+            else -> {}
         }
         return this
     }
@@ -35,8 +37,9 @@ data class BotData(
         isTop: Boolean = false,
     ): BotData {
         when (commandData) {
-            is CreateMemeData -> commandData.addText(text, isTop)
-            is CreateStickerData -> commandData.addText(text, isTop)
+            is MemeData -> commandData.addText(text, isTop)
+            is StickerData -> commandData.addText(text, isTop)
+            else -> {}
         }
         return this
     }
@@ -46,14 +49,15 @@ data class BotData(
         fileName: String,
     ): BotData {
         when (commandData) {
-            is CreateMemeData -> commandData.addImage(file, fileName)
-            is CreateStickerData -> commandData.addImage(file, fileName)
+            is MemeData -> commandData.addImage(file, fileName)
+            is StickerData -> commandData.addImage(file, fileName)
             is FaceSwapData -> commandData.addImage(file, fileName)
+            else -> {}
         }
         return this
     }
 
-    fun getAsCreateStickerData() = commandData as CreateStickerData
+    fun getAsStickerData() = commandData as StickerData
 
     fun getAsFaceSwapData() = commandData as FaceSwapData
 
@@ -65,9 +69,9 @@ data class BotData(
 
     fun isFaceSwapData() = commandData.isFaceSwapData()
 
-    fun isStickerDataWithTopText() = isStickerData() && getAsCreateStickerData().status == StickerStatus.TOP_TEXT_ADDED
+    fun isStickerDataWithTopText() = isStickerData() && getAsStickerData().status == StickerStatus.TOP_TEXT_ADDED
 
-    fun isStickerDataWithSourceFile() = isStickerData() && getAsCreateStickerData().status == StickerStatus.SOURCE_FILE_ADDED
+    fun isStickerDataWithSourceFile() = isStickerData() && getAsStickerData().status == StickerStatus.SOURCE_FILE_ADDED
 
     fun isFaceSwapDataWithSourceFile() = isFaceSwapData() && getAsFaceSwapData().status == FaceSwapStatus.SOURCE_FILE_ADDED
 

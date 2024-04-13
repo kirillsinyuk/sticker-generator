@@ -1,6 +1,8 @@
-package com.kvsinyuk.stickergenerator.domain
+package com.kvsinyuk.stickergenerator.domain.command
 
-abstract class CommandData {
+import com.kvsinyuk.stickergenerator.domain.Image
+
+sealed class CommandData {
     open fun isStickerData() = false
 
     open fun isFaceSwapData() = false

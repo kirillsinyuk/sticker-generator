@@ -6,7 +6,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessa
 import com.kvsinyuk.stickergenerator.domain.BotCommand
 import com.kvsinyuk.stickergenerator.domain.BotData
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
-import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
+import com.kvsinyuk.stickergenerator.domain.command.StickerData
 import org.springframework.stereotype.Component
 
 @Component
@@ -15,7 +15,7 @@ class MakeStickerCmdHandler(
     private val saveStickerDataUseCase: SaveStickerDataUseCase,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        saveStickerDataUseCase.save(BotData(update.chatId, CreateStickerData()))
+        saveStickerDataUseCase.save(BotData(update.chatId, StickerData()))
         telegramMessagePort.sendMessageByCode(update.chatId, "command.crt-sticker.response")
     }
 

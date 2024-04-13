@@ -1,18 +1,17 @@
-package com.kvsinyuk.stickergenerator.domain.meme
+package com.kvsinyuk.stickergenerator.domain.command
 
-import com.kvsinyuk.stickergenerator.domain.CommandData
 import com.kvsinyuk.stickergenerator.domain.Image
 import org.springframework.data.annotation.TypeAlias
 
-@TypeAlias("create_meme")
-data class CreateMemeData(
-    var status: MemeStatus = MemeStatus.INIT,
+@TypeAlias("create_sticker")
+data class StickerData(
+    var status: StickerStatus = StickerStatus.INIT,
     var topText: String = "",
     var bottomText: String = "",
 ) : CommandData() {
     lateinit var image: Image
 
-    override fun isMemeData() = true
+    override fun isStickerData() = true
 
     override fun getSourceImage() = image
 
@@ -21,7 +20,7 @@ data class CreateMemeData(
         isTop: Boolean,
     ) {
         if (isTop) {
-            status = MemeStatus.TOP_TEXT_ADDED
+            status = StickerStatus.TOP_TEXT_ADDED
             topText = text.takeIf { it != "*" } ?: ""
         } else {
             bottomText = text.takeIf { it != "*" } ?: ""
@@ -32,7 +31,13 @@ data class CreateMemeData(
         file: ByteArray,
         fileName: String,
     ) {
-        status = MemeStatus.SOURCE_FILE_ADDED
+        status = StickerStatus.SOURCE_FILE_ADDED
         image = Image(file, fileName)
     }
+}
+
+enum class StickerStatus {
+    INIT,
+    SOURCE_FILE_ADDED,
+    TOP_TEXT_ADDED,
 }

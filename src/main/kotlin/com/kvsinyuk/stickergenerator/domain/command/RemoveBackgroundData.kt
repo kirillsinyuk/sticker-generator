@@ -1,6 +1,5 @@
-package com.kvsinyuk.stickergenerator.domain.background
+package com.kvsinyuk.stickergenerator.domain.command
 
-import com.kvsinyuk.stickergenerator.domain.CommandData
 import com.kvsinyuk.stickergenerator.domain.Image
 import org.springframework.data.annotation.TypeAlias
 
@@ -13,4 +12,8 @@ data class RemoveBackgroundData(
     override fun getSourceImage(): Image {
         TODO("Won't be implemented")
     }
+}
+
+enum class RemoveBackgroundStatus {
+    INIT,
 }

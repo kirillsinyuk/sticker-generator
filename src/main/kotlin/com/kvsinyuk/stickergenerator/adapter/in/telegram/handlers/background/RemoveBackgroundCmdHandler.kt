@@ -6,7 +6,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessa
 import com.kvsinyuk.stickergenerator.domain.BotCommand.REMOVE_BACKGROUND
 import com.kvsinyuk.stickergenerator.domain.BotData
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
-import com.kvsinyuk.stickergenerator.domain.background.RemoveBackgroundData
+import com.kvsinyuk.stickergenerator.domain.command.RemoveBackgroundData
 import org.springframework.stereotype.Component
 
 @Component
