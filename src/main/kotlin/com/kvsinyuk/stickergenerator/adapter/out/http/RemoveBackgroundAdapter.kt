@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.adapter.out.http
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
-import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
-import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toByteArray
 import mu.KLogging
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -26,7 +26,7 @@ class RemoveBackgroundAdapter(
     ): BufferedImage {
         val response = callForBackgroundRemove(image, originalFilename)
         return response.body?.bytes()
-            ?.getBufferedImage()
+            ?.toBufferedImage()
             ?: run {
                 logger.error { response.message }
                 throw RuntimeException(response.message)
@@ -46,7 +46,7 @@ class RemoveBackgroundAdapter(
                         .addFormDataPart(
                             "file",
                             originalFilename,
-                            image.mapToByteArray().toRequestBody(),
+                            image.toByteArray().toRequestBody(),
                         )
                         .build(),
                 )

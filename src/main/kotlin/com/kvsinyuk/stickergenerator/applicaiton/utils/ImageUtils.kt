@@ -5,12 +5,12 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
 
-fun BufferedImage.mapToByteArray(): ByteArray =
+fun BufferedImage.toByteArray(): ByteArray =
     ByteArrayOutputStream().use {
         ImageIO.write(this, "png", it)
         it.toByteArray()
     }
 
-fun ByteArray.getBufferedImage(): BufferedImage =
+fun ByteArray.toBufferedImage(): BufferedImage =
     ByteArrayInputStream(this)
         .use { ImageIO.read(it) }
