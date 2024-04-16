@@ -6,7 +6,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessa
 import com.kvsinyuk.stickergenerator.domain.BotCommand.FACE_SWAP
 import com.kvsinyuk.stickergenerator.domain.BotData
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
-import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapData
+import com.kvsinyuk.stickergenerator.domain.command.FaceSwapData
 import org.springframework.stereotype.Component
 
 @Component

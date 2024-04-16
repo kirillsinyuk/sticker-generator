@@ -1,6 +1,5 @@
-package com.kvsinyuk.stickergenerator.domain.faceswap
+package com.kvsinyuk.stickergenerator.domain.command
 
-import com.kvsinyuk.stickergenerator.domain.CommandData
 import com.kvsinyuk.stickergenerator.domain.Image
 import org.springframework.data.annotation.TypeAlias
 
@@ -32,4 +31,10 @@ data class FaceSwapData(
             else -> null
         }
     }
+}
+
+enum class FaceSwapStatus {
+    INIT,
+    SOURCE_FILE_ADDED,
+    TARGET_FILE_ADDED,
 }

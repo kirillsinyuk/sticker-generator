@@ -5,8 +5,8 @@ import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
 import com.kvsinyuk.stickergenerator.domain.BotData
 import com.kvsinyuk.stickergenerator.domain.Image
-import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
-import com.kvsinyuk.stickergenerator.domain.sticker.StickerStatus
+import com.kvsinyuk.stickergenerator.domain.command.StickerData
+import com.kvsinyuk.stickergenerator.domain.command.StickerStatus
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -30,12 +30,12 @@ class CropImageServiceTest {
         val botData =
             BotData(
                 1,
-                CreateStickerData(StickerStatus.INIT, "", "")
+                StickerData(StickerStatus.INIT, "", "")
                     .apply { image = Image(imageUrl.readBytes(), imageUrl.file) },
             )
 
         // when
-        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image.image.getBufferedImage())
+        val croppedImage = cropImageService.cropImage(botData.getAsStickerData().image.image.getBufferedImage())
 
         // then
         assert(croppedImage.height == 228)
@@ -49,12 +49,12 @@ class CropImageServiceTest {
         val botData =
             BotData(
                 1,
-                CreateStickerData(StickerStatus.INIT, "test text", "")
+                StickerData(StickerStatus.INIT, "test text", "")
                     .apply { image = Image(imageUrl.readBytes(), imageUrl.file) },
             )
 
         // when
-        val croppedImage = cropImageService.cropImage(botData.getAsCreateStickerData().image.image.getBufferedImage())
+        val croppedImage = cropImageService.cropImage(botData.getAsStickerData().image.image.getBufferedImage())
         val paddedImage = padImageService.addPaddingIfNecessary(croppedImage, true)
 
         // then

@@ -1,9 +1,9 @@
 package com.kvsinyuk.stickergenerator.config
 
-import com.kvsinyuk.stickergenerator.domain.background.RemoveBackgroundData
-import com.kvsinyuk.stickergenerator.domain.faceswap.FaceSwapData
-import com.kvsinyuk.stickergenerator.domain.meme.CreateMemeData
-import com.kvsinyuk.stickergenerator.domain.sticker.CreateStickerData
+import com.kvsinyuk.stickergenerator.domain.command.FaceSwapData
+import com.kvsinyuk.stickergenerator.domain.command.MemeData
+import com.kvsinyuk.stickergenerator.domain.command.RemoveBackgroundData
+import com.kvsinyuk.stickergenerator.domain.command.StickerData
 import com.mongodb.ConnectionString
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClient
@@ -43,8 +43,8 @@ class MongoDbConfig(
     fun configurableTypeInformationMapper() =
         ConfigurableTypeInformationMapper(
             mapOf(
-                CreateMemeData::class.java to "create_meme",
-                CreateStickerData::class.java to "create_sticker",
+                MemeData::class.java to "create_meme",
+                StickerData::class.java to "create_sticker",
                 FaceSwapData::class.java to "face_swap",
                 RemoveBackgroundData::class.java to "remove_background",
             ),
