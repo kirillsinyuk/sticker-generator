@@ -6,11 +6,13 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.AddImageUseC
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 
 @Component
 class StickerImageHandler(
     private val findBotDataPort: FindBotDataPort,
+    @Qualifier("addImageWithResizeUseCaseImpl")
     private val addImageUseCase: AddImageUseCase,
     private val telegramMessagePort: TelegramMessagePort,
 ) : TelegramUpdateHandler {

@@ -4,9 +4,10 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.SaveBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.service.AddTextService
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
-import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
-import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toByteArray
 import com.kvsinyuk.stickergenerator.domain.BotData
+import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 
 abstract class AddTopTextUseCase(
@@ -27,6 +28,7 @@ abstract class AddTopTextUseCase(
     )
 }
 
+@Primary
 @Component
 class AddTopTextUseCaseImpl(
     getBotDataPort: GetBotDataPort,
@@ -36,8 +38,8 @@ class AddTopTextUseCaseImpl(
     override fun drawTextOnImage(data: BotData): BotData {
         val image = data.commandData.getSourceImage()
         val result =
-            addTextService.addText(image.image.getBufferedImage(), data.getTopText(), true)
-                .mapToByteArray()
+            addTextService.addText(image.image.toBufferedImage(), data.getTopText(), true)
+                .toByteArray()
         return data.setImage(image.copy(image = result))
     }
 }
@@ -52,9 +54,9 @@ class AddTopTextWithPaddingUseCaseImpl(
     override fun drawTextOnImage(data: BotData): BotData {
         val image = data.commandData.getSourceImage()
         val result =
-            padImageService.addPaddingIfNecessary(image.image.getBufferedImage(), data.getTopText().isBlank())
+            padImageService.addPaddingIfNecessary(image.image.toBufferedImage(), data.getTopText().isBlank())
                 .let { addTextService.addText(it, data.getTopText(), true) }
-                .mapToByteArray()
+                .toByteArray()
         return data.setImage(image.copy(image = result))
     }
 }

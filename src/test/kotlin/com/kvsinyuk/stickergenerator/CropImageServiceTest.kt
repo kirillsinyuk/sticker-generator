@@ -2,7 +2,7 @@ package com.kvsinyuk.stickergenerator
 
 import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
-import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
 import com.kvsinyuk.stickergenerator.domain.BotData
 import com.kvsinyuk.stickergenerator.domain.Image
 import com.kvsinyuk.stickergenerator.domain.command.StickerData
@@ -35,7 +35,7 @@ class CropImageServiceTest {
             )
 
         // when
-        val croppedImage = cropImageService.cropImage(botData.getAsStickerData().image.image.getBufferedImage())
+        val croppedImage = cropImageService.cropImage(botData.getAsStickerData().image.image.toBufferedImage())
 
         // then
         assert(croppedImage.height == 228)
@@ -54,7 +54,7 @@ class CropImageServiceTest {
             )
 
         // when
-        val croppedImage = cropImageService.cropImage(botData.getAsStickerData().image.image.getBufferedImage())
+        val croppedImage = cropImageService.cropImage(botData.getAsStickerData().image.image.toBufferedImage())
         val paddedImage = padImageService.addPaddingIfNecessary(croppedImage, true)
 
         // then

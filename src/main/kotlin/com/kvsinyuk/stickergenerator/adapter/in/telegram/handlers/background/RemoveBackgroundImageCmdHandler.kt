@@ -6,7 +6,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram.RemoveBackgr
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.DeleteBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.FindBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
-import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toByteArray
 import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
 import org.springframework.stereotype.Component
 
@@ -21,7 +21,7 @@ class RemoveBackgroundImageCmdHandler(
         val document = update.document!!
         val resultImage = removeBackgroundUseCase.removeBackground(RemoveBackgroundCommand(update.chatId, document))
         deleteBotDataPort.delete(update.chatId)
-        telegramMessagePort.sendDocument(update.chatId, resultImage.mapToByteArray(), document.fileName())
+        telegramMessagePort.sendDocument(update.chatId, resultImage.toByteArray(), document.fileName())
     }
 
     override fun canApply(update: TelegramUpdateMessage) =

@@ -1,8 +1,8 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.http
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
-import com.kvsinyuk.stickergenerator.applicaiton.utils.getBufferedImage
-import com.kvsinyuk.stickergenerator.applicaiton.utils.mapToByteArray
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
+import com.kvsinyuk.stickergenerator.applicaiton.utils.toByteArray
 import mu.KLogging
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,8 +22,8 @@ class RemoveBackgroundController(
     ): ByteArray {
         logger.info { "Removing background from image ${file.originalFilename}" }
         return removeBackgroundPort
-            .removeBackground(file.bytes.getBufferedImage(), file.originalFilename ?: "result.png")
-            .mapToByteArray()
+            .removeBackground(file.bytes.toBufferedImage(), file.originalFilename ?: "result.png")
+            .toByteArray()
     }
 
     companion object : KLogging()
