@@ -27,7 +27,7 @@ abstract class AddImageUseCase(
         data: BotData,
         image: Image,
     ): BotData {
-        return data.setImage(image)
+        return data.addImage(image)
     }
 
     data class AddImageCommand(
@@ -59,6 +59,6 @@ class AddImageWithResizeUseCaseImpl(
         val resizedImage =
             resizeImageService.resizeBufferedImage(image.image.toBufferedImage())
                 .let { image.copy(image = it.toByteArray()) }
-        return data.setImage(resizedImage)
+        return data.addImage(resizedImage)
     }
 }

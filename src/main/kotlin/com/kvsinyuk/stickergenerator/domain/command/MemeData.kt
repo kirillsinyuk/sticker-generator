@@ -27,12 +27,9 @@ data class MemeData(
         }
     }
 
-    fun addImage(
-        file: ByteArray,
-        fileName: String,
-    ) {
+    fun addImage(image: Image) {
         status = MemeStatus.SOURCE_FILE_ADDED
-        image = Image(file, fileName)
+        this.image = image
     }
 }
 

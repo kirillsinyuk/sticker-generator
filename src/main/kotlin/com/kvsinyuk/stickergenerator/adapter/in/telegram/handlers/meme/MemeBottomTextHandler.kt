@@ -27,6 +27,6 @@ class MemeBottomTextHandler(
 
     override fun canApply(update: TelegramUpdateMessage) =
         update.takeIf { !it.message.isNullOrBlank() }
-            ?.let { findBotDataPort.findByChatId(it.chatId)?.isStickerDataWithTopText() == true }
+            ?.let { findBotDataPort.findByChatId(it.chatId)?.isMemeDataWithTopText() == true }
             ?: false
 }
