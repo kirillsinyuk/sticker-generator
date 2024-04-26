@@ -14,21 +14,18 @@ data class FaceSwapData(
 
     override fun getSourceImage() = faceImage
 
-    fun addImage(
-        file: ByteArray,
-        fileName: String,
-    ) {
+    fun addImage(image: Image) {
         when (status) {
             FaceSwapStatus.INIT -> {
-                faceImage = Image(file, fileName)
+                faceImage = image
                 status = FaceSwapStatus.SOURCE_FILE_ADDED
             }
 
             FaceSwapStatus.SOURCE_FILE_ADDED -> {
-                targetImage = Image(file, fileName)
+                targetImage = image
                 status = FaceSwapStatus.TARGET_FILE_ADDED
             }
-            else -> null
+            else -> {}
         }
     }
 }

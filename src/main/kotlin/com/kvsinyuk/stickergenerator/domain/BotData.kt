@@ -4,6 +4,7 @@ import com.kvsinyuk.stickergenerator.domain.command.CommandData
 import com.kvsinyuk.stickergenerator.domain.command.FaceSwapData
 import com.kvsinyuk.stickergenerator.domain.command.FaceSwapStatus
 import com.kvsinyuk.stickergenerator.domain.command.MemeData
+import com.kvsinyuk.stickergenerator.domain.command.MemeStatus
 import com.kvsinyuk.stickergenerator.domain.command.StickerData
 import com.kvsinyuk.stickergenerator.domain.command.StickerStatus
 import org.springframework.data.annotation.Id
@@ -44,20 +45,19 @@ data class BotData(
         return this
     }
 
-    fun addImage(
-        file: ByteArray,
-        fileName: String,
-    ): BotData {
+    fun addImage(image: Image): BotData {
         when (commandData) {
-            is MemeData -> commandData.addImage(file, fileName)
-            is StickerData -> commandData.addImage(file, fileName)
-            is FaceSwapData -> commandData.addImage(file, fileName)
+            is MemeData -> commandData.addImage(image)
+            is StickerData -> commandData.addImage(image)
+            is FaceSwapData -> commandData.addImage(image)
             else -> {}
         }
         return this
     }
 
     fun getAsStickerData() = commandData as StickerData
+
+    fun getAsMemeData() = commandData as MemeData
 
     fun getAsFaceSwapData() = commandData as FaceSwapData
 
@@ -72,6 +72,10 @@ data class BotData(
     fun isStickerDataWithTopText() = isStickerData() && getAsStickerData().status == StickerStatus.TOP_TEXT_ADDED
 
     fun isStickerDataWithSourceFile() = isStickerData() && getAsStickerData().status == StickerStatus.SOURCE_FILE_ADDED
+
+    fun isMemeDataWithSourceFile() = isMemeData() && getAsMemeData().status == MemeStatus.SOURCE_FILE_ADDED
+
+    fun isMemeDataWithTopText() = isMemeData() && getAsMemeData().status == MemeStatus.TOP_TEXT_ADDED
 
     fun isFaceSwapDataWithSourceFile() = isFaceSwapData() && getAsFaceSwapData().status == FaceSwapStatus.SOURCE_FILE_ADDED
 

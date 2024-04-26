@@ -19,8 +19,6 @@ Maybe once there will be a webpage or API, but not in near future.
 
 This feature has all steps to make a telegram sticker such as:
 
-* Remove image background(it`s not perfect, so keep that in mind);
-* Crop empty space;
 * Resize image to sticker size(at least one side should be exactly 512px);
 * Add top and bottom text(in case of adding top text 15% top padding will be added as well);
 
@@ -35,6 +33,20 @@ Basically the result is something like this:
 |===
 
 After that you can use https://t.me/Stickers to add sticker to stickerpack or create a new one.
+
+==== Create meme (/crt-meme)
+
+This feature adds text to an image:
+
+The result is something like this:
+
+[cols="a,a", role="center"]
+|===
+| Source | Result
+
+| image::example-meme-before.jpeg[]
+| image::example-meme-after.jpeg[]
+|===
 
 ==== Swap face (/swp-face)
 
