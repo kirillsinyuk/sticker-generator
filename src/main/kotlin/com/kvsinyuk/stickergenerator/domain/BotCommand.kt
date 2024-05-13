@@ -6,10 +6,10 @@ enum class BotCommand(
 ) {
     START("/start"),
     HELP("/help"),
-    CREATE_MEME("/crt-meme", "Create meme"),
-    MAKE_STICKER("/crt-sticker", "Create telegram sticker"),
-    FACE_SWAP("/swp-face", "Swap face on a picture"),
-    REMOVE_BACKGROUND("/rm-background", "Remove background from picture"),
+    CREATE_MEME("/crt_meme", "Create meme"),
+    MAKE_STICKER("/crt_sticker", "Create telegram sticker"),
+    FACE_SWAP("/swp_face", "Swap face on a picture"),
+    REMOVE_BACKGROUND("/rm_bg", "Remove background from picture"),
 }
 
 val MENU_COMMANDS =
