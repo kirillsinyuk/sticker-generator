@@ -8,6 +8,8 @@ import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
 import com.kvsinyuk.stickergenerator.applicaiton.utils.toByteArray
 import com.kvsinyuk.stickergenerator.domain.BotData
 import com.kvsinyuk.stickergenerator.domain.Image
+import com.kvsinyuk.stickergenerator.validation.ValidFileType
+import jakarta.validation.Valid
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 
@@ -16,7 +18,9 @@ abstract class AddImageUseCase(
     private val getBotDataPort: GetBotDataPort,
     private val saveBotDataPort: SaveBotDataPort,
 ) {
-    open fun addImage(command: AddImageCommand): BotData {
+    open fun addImage(
+        @Valid command: AddImageCommand,
+    ): BotData {
         val file = telegramFilePort.getFileContent(command.fileId)
         return getBotDataPort.getByChatId(command.chatId)
             .let { setImage(it, Image(file, command.originalFilename)) }
@@ -33,6 +37,7 @@ abstract class AddImageUseCase(
     data class AddImageCommand(
         val chatId: Long,
         val fileId: String,
+        @ValidFileType
         val originalFilename: String,
     )
 }
