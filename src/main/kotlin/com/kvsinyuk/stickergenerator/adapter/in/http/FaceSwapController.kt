@@ -16,7 +16,7 @@ class FaceSwapController(
     private val faceSwapPort: FaceSwapPort,
 ) {
     @PostMapping(produces = [MediaType.IMAGE_PNG_VALUE])
-    fun createSticker(
+    fun swapFaces(
         @RequestParam("sourceFile") sourceFile: MultipartFile,
         @RequestParam("targetFile") targetFile: MultipartFile,
     ): ByteArray {
