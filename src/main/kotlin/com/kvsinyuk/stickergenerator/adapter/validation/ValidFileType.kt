@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.validation
+package com.kvsinyuk.stickergenerator.adapter.validation
 
 import jakarta.validation.Constraint
 import kotlin.reflect.KClass

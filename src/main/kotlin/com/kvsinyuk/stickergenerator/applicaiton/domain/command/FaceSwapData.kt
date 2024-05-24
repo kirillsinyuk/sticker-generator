@@ -1,6 +1,6 @@
-package com.kvsinyuk.stickergenerator.domain.command
+package com.kvsinyuk.stickergenerator.applicaiton.domain.command
 
-import com.kvsinyuk.stickergenerator.domain.Image
+import com.kvsinyuk.stickergenerator.applicaiton.domain.Image
 import org.springframework.data.annotation.TypeAlias
 
 @TypeAlias("face_swap")

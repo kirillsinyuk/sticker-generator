@@ -1,9 +1,9 @@
 package com.kvsinyuk.stickergenerator.config
 
-import com.kvsinyuk.stickergenerator.domain.command.FaceSwapData
-import com.kvsinyuk.stickergenerator.domain.command.MemeData
-import com.kvsinyuk.stickergenerator.domain.command.RemoveBackgroundData
-import com.kvsinyuk.stickergenerator.domain.command.StickerData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.FaceSwapData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.MemeData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.RemoveBackgroundData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.StickerData
 import com.mongodb.ConnectionString
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClient

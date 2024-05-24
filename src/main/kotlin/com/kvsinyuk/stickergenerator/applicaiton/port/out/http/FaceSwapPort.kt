@@ -1,6 +1,6 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.out.http
 
-import com.kvsinyuk.stickergenerator.domain.Image
+import com.kvsinyuk.stickergenerator.applicaiton.domain.Image
 
 interface FaceSwapPort {
     fun swapFace(

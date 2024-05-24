@@ -1,11 +1,11 @@
 package com.kvsinyuk.stickergenerator
 
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.Image
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.StickerData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.StickerStatus
 import com.kvsinyuk.stickergenerator.applicaiton.service.CropImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
-import com.kvsinyuk.stickergenerator.domain.BotData
-import com.kvsinyuk.stickergenerator.domain.Image
-import com.kvsinyuk.stickergenerator.domain.command.StickerData
-import com.kvsinyuk.stickergenerator.domain.command.StickerStatus
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

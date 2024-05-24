@@ -1,7 +1,7 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo
 
-import com.kvsinyuk.stickergenerator.adapter.out.mongo.StickerDataRepository
-import com.kvsinyuk.stickergenerator.domain.BotData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotData
+import com.kvsinyuk.stickergenerator.infrastructure.mongo.StickerDataRepository
 import org.springframework.stereotype.Component
 
 interface SaveBotDataPort {

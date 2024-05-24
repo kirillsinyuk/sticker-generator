@@ -1,12 +1,12 @@
 package com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.swap
 
 import com.kvsinyuk.stickergenerator.adapter.`in`.telegram.handlers.TelegramUpdateHandler
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotCommand.FACE_SWAP
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.TelegramUpdateMessage
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.FaceSwapData
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.SaveStickerDataUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort
-import com.kvsinyuk.stickergenerator.domain.BotCommand.FACE_SWAP
-import com.kvsinyuk.stickergenerator.domain.BotData
-import com.kvsinyuk.stickergenerator.domain.TelegramUpdateMessage
-import com.kvsinyuk.stickergenerator.domain.command.FaceSwapData
 import org.springframework.stereotype.Component
 
 @Component

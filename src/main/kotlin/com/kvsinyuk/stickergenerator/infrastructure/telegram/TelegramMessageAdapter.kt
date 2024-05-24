@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.adapter.out.telegram
+package com.kvsinyuk.stickergenerator.infrastructure.telegram
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.MessageSourcePort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramMessagePort

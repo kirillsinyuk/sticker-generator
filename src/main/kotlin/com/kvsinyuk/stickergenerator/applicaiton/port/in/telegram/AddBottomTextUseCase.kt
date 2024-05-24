@@ -1,11 +1,11 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.`in`.telegram
 
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotData
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.GetBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.mongo.SaveBotDataPort
 import com.kvsinyuk.stickergenerator.applicaiton.service.AddTextService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
 import com.kvsinyuk.stickergenerator.applicaiton.utils.toByteArray
-import com.kvsinyuk.stickergenerator.domain.BotData
 import org.springframework.stereotype.Component
 
 interface AddBottomTextUseCase {

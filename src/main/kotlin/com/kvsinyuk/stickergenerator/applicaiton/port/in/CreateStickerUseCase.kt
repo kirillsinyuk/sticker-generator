@@ -1,10 +1,10 @@
 package com.kvsinyuk.stickergenerator.applicaiton.port.`in`
 
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotData
 import com.kvsinyuk.stickergenerator.applicaiton.service.AddTextService
 import com.kvsinyuk.stickergenerator.applicaiton.service.PadImageService
 import com.kvsinyuk.stickergenerator.applicaiton.service.ResizeImageService
 import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
-import com.kvsinyuk.stickergenerator.domain.BotData
 import org.springframework.stereotype.Component
 import java.awt.image.BufferedImage
 

@@ -1,11 +1,11 @@
-package com.kvsinyuk.stickergenerator.adapter.out.telegram
+package com.kvsinyuk.stickergenerator.infrastructure.telegram
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.telegram.TelegramSetMenuPort
 import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.model.BotCommand
 import com.pengrad.telegrambot.request.SetMyCommands
 import org.springframework.stereotype.Component
-import com.kvsinyuk.stickergenerator.domain.BotCommand as Command
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotCommand as Command
 
 @Component
 class TelegramSetMenuAdapter(
