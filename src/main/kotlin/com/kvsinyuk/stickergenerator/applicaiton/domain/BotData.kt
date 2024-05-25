@@ -1,12 +1,12 @@
-package com.kvsinyuk.stickergenerator.domain
+package com.kvsinyuk.stickergenerator.applicaiton.domain
 
-import com.kvsinyuk.stickergenerator.domain.command.CommandData
-import com.kvsinyuk.stickergenerator.domain.command.FaceSwapData
-import com.kvsinyuk.stickergenerator.domain.command.FaceSwapStatus
-import com.kvsinyuk.stickergenerator.domain.command.MemeData
-import com.kvsinyuk.stickergenerator.domain.command.MemeStatus
-import com.kvsinyuk.stickergenerator.domain.command.StickerData
-import com.kvsinyuk.stickergenerator.domain.command.StickerStatus
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.CommandData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.FaceSwapData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.FaceSwapStatus
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.MemeData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.MemeStatus
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.StickerData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.command.StickerStatus
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 

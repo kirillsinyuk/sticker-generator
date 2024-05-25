@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.domain
+package com.kvsinyuk.stickergenerator.applicaiton.domain
 
 import com.pengrad.telegrambot.model.Document
 import com.pengrad.telegrambot.model.PhotoSize

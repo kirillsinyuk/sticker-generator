@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.domain
+package com.kvsinyuk.stickergenerator.applicaiton.domain
 
 data class Image(
     val image: ByteArray,

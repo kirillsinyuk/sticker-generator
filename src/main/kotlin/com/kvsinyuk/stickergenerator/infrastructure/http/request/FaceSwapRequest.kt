@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.adapter.out.http.request
+package com.kvsinyuk.stickergenerator.infrastructure.http.request
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

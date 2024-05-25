@@ -1,6 +1,6 @@
-package com.kvsinyuk.stickergenerator.adapter.out.mongo
+package com.kvsinyuk.stickergenerator.infrastructure.mongo
 
-import com.kvsinyuk.stickergenerator.domain.BotData
+import com.kvsinyuk.stickergenerator.applicaiton.domain.BotData
 import org.springframework.data.mongodb.repository.MongoRepository
 
 interface StickerDataRepository : MongoRepository<BotData, Long> {

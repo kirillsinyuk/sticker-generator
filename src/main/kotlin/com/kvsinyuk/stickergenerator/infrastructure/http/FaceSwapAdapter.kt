@@ -1,10 +1,10 @@
-package com.kvsinyuk.stickergenerator.adapter.out.http
+package com.kvsinyuk.stickergenerator.infrastructure.http
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.kvsinyuk.stickergenerator.adapter.out.http.request.FaceSwapRequest
-import com.kvsinyuk.stickergenerator.adapter.out.http.response.FaceSwapResponse
+import com.kvsinyuk.stickergenerator.applicaiton.domain.Image
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.FaceSwapPort
-import com.kvsinyuk.stickergenerator.domain.Image
+import com.kvsinyuk.stickergenerator.infrastructure.http.request.FaceSwapRequest
+import com.kvsinyuk.stickergenerator.infrastructure.http.response.FaceSwapResponse
 import mu.KLogging
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType

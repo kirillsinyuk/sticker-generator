@@ -1,4 +1,4 @@
-package com.kvsinyuk.stickergenerator.adapter.out.http
+package com.kvsinyuk.stickergenerator.infrastructure.http
 
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.RemoveBackgroundPort
 import com.kvsinyuk.stickergenerator.applicaiton.utils.toBufferedImage
