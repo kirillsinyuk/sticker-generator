@@ -32,9 +32,8 @@ class AddBottomTextUseCaseImpl(
 
     private fun drawTextOnImage(data: BotData): BotData {
         val image = data.commandData.getSourceImage()
-        val result =
-            addTextService.addText(image.image.toBufferedImage(), data.getTopText(), false)
-                .toByteArray()
+        val result = addTextService.addText(image.image.toBufferedImage(), data.getTopText(), false)
+            .toByteArray()
         return data.setImage(image.copy(image = result))
     }
 }

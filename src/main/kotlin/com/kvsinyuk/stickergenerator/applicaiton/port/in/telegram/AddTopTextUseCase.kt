@@ -54,7 +54,7 @@ class AddTopTextWithPaddingUseCaseImpl(
     override fun drawTextOnImage(data: BotData): BotData {
         val image = data.commandData.getSourceImage()
         val result =
-            padImageService.addPaddingIfNecessary(image.image.toBufferedImage(), data.getTopText().isBlank())
+            padImageService.addPaddingIfNecessary(image.image.toBufferedImage(), data.getTopText().isNotBlank())
                 .let { addTextService.addText(it, data.getTopText(), true) }
                 .toByteArray()
         return data.setImage(image.copy(image = result))
