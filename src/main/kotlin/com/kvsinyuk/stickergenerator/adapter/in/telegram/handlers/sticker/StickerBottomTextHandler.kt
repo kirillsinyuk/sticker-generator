@@ -17,9 +17,10 @@ class StickerBottomTextHandler(
     private val deleteBotDataPort: DeleteBotDataPort,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
-        val image = addBottomTextUseCase.addBottomText(AddBottomTextCommand(update.chatId, update.message!!))
-            .commandData
-            .getSourceImage()
+        val image =
+            addBottomTextUseCase.addBottomText(AddBottomTextCommand(update.chatId, update.message!!))
+                .commandData
+                .getSourceImage()
         telegramMessagePort.sendDocument(update.chatId, image.image, image.fileName)
             .also { deleteBotDataPort.delete(update.chatId) }
     }
