@@ -28,6 +28,6 @@ class RemoveBackgroundUseCaseImpl(
 ) : RemoveBackgroundUseCase {
     override fun removeBackground(command: RemoveBackgroundUseCase.RemoveBackgroundCommand) =
         telegramFilePort.getFileContent(command.fileId)
-            .let { removeBackgroundPort.removeBackground(it.toBufferedImage(), command.originalFilename) }
+            .let { removeBackgroundPort.removeBackground(it.image.toBufferedImage(), command.originalFilename) }
             .let { cropImageService.cropImage(it) }
 }
