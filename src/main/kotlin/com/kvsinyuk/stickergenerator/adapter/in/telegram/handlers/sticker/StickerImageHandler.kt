@@ -17,13 +17,15 @@ class StickerImageHandler(
     private val telegramMessagePort: TelegramMessagePort,
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
+        val fileId =
+            update.document?.fileId() ?: update.sticker!!.fileId()
         update
-            .let { AddImageCommand(it.chatId, it.document!!.fileId(), it.document.fileName()) }
+            .let { AddImageCommand(it.chatId, fileId) }
             .also { addImageUseCase.addImage(it) }
         telegramMessagePort.sendMessageByCode(update.chatId, "command.crt-sticker.image-added.response")
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.document != null &&
+        (update.document != null || update.sticker != null) &&
             findBotDataPort.findByChatId(update.chatId)?.isStickerData() == true
 }

@@ -36,6 +36,7 @@ dependencies {
 	kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
 	implementation("org.mapstruct:mapstruct:$mapstructVersion")
 
+	implementation("com.twelvemonkeys.imageio:imageio-webp:3.12.0")
 	implementation("commons-io:commons-io:2.13.0")
 	implementation("com.github.pengrad:java-telegram-bot-api:6.9.1")
 

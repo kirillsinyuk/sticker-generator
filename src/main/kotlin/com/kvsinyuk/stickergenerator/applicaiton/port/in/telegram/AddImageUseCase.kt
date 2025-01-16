@@ -21,9 +21,9 @@ abstract class AddImageUseCase(
     open fun addImage(
         @Valid command: AddImageCommand,
     ): BotData {
-        val file = telegramFilePort.getFileContent(command.fileId)
+        val image = telegramFilePort.getFileContent(command.fileId)
         return getBotDataPort.getByChatId(command.chatId)
-            .let { setImage(it, Image(file, command.originalFilename)) }
+            .let { setImage(it, image) }
             .let { saveBotDataPort.save(it) }
     }
 
@@ -38,7 +38,7 @@ abstract class AddImageUseCase(
         val chatId: Long,
         val fileId: String,
         @ValidFileType
-        val originalFilename: String,
+        val originalFilename: String = "file.png", // TODO fix
     )
 }
 
