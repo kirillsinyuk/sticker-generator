@@ -16,7 +16,7 @@ class CreateMemeUseCaseImpl(
 ) : CreateMemeUseCase {
     override fun createMeme(botData: BotData): BufferedImage {
         val memeData = botData.getAsMemeData()
-        return addTextService.addText(memeData.image.image.toBufferedImage(), botData.getAsStickerData().topText, true)
+        return addTextService.addText(memeData.image.image.toBufferedImage(), memeData.topText, true)
             .let { addTextService.addText(it, memeData.bottomText, false) }
     }
 }
