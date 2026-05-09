@@ -21,7 +21,7 @@ class CreateStickerUseCaseImpl(
     override fun createSticker(botData: BotData): BufferedImage {
         val stickerData = botData.getAsStickerData()
         return resizeImageService.resizeBufferedImage(stickerData.image.image.toBufferedImage())
-            .let { padImageService.addPaddingIfNecessary(it, stickerData.topText.isBlank()) }
+            .let { padImageService.addPaddingIfNecessary(it, !stickerData.topText.isBlank()) }
             .let { addTextService.addText(it, botData.getAsStickerData().topText, true) }
             .let { addTextService.addText(it, botData.getAsStickerData().bottomText, false) }
     }

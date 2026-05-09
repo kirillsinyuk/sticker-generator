@@ -6,7 +6,7 @@ interface TelegramMessagePort {
         msgCode: String,
     )
 
-    fun sendDocument(
+    fun sendPhoto(
         chatId: Long,
         photo: ByteArray,
         fileName: String,

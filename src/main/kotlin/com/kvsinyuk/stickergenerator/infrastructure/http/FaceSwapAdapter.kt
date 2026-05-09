@@ -31,11 +31,17 @@ class FaceSwapAdapter(
         sourceImage: Image,
         targetImage: Image,
     ): ByteArray {
-        val response = callForFaceSwap(chatId, sourceImage, targetImage)
-        return Base64.decode(
-            objectMapper.readValue(response.body!!.charStream(), FaceSwapResponse::class.java)
-                .output,
-        )
+        return callForFaceSwap(chatId, sourceImage, targetImage).use { response ->
+            if (!response.isSuccessful) {
+                val body = response.body?.string().orEmpty()
+                logger.error { "Face swap failed: ${response.code} $body" }
+                throw RuntimeException("Face swap failed: ${response.code}")
+            }
+            Base64.decode(
+                objectMapper.readValue(response.body!!.charStream(), FaceSwapResponse::class.java)
+                    .output,
+            )
+        }
     }
 
     @OptIn(ExperimentalEncodingApi::class)

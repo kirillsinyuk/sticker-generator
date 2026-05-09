@@ -21,7 +21,7 @@ class StickerBottomTextHandler(
             addBottomTextUseCase.addBottomText(AddBottomTextCommand(update.chatId, update.message!!))
                 .commandData
                 .getSourceImage()
-        telegramMessagePort.sendDocument(update.chatId, image.image, image.fileName)
+        telegramMessagePort.sendPhoto(update.chatId, image.image, image.fileName)
             .also { deleteBotDataPort.delete(update.chatId) }
     }
 

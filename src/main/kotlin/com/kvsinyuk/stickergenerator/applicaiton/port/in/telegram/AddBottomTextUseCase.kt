@@ -25,7 +25,7 @@ class AddBottomTextUseCaseImpl(
 ) : AddBottomTextUseCase {
     override fun addBottomText(command: AddBottomTextUseCase.AddBottomTextCommand): BotData {
         return getBotDataPort.getByChatId(command.chatId)
-            .addText(command.message, true)
+            .addText(command.message, false)
             .let { drawTextOnImage(it) }
             .let { saveBotDataPort.save(it) }
     }

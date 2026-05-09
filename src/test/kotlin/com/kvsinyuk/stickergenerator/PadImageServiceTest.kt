@@ -41,7 +41,7 @@ class PadImageServiceTest {
         val paddedImage = padImageService.addPaddingIfNecessary(resourceImage, false)
 
         // then
-        assert(paddedImage.width == paddedImage.width)
+        assert(resourceImage.width == paddedImage.width)
         assert(resourceImage.height == paddedImage.height)
     }
 }
