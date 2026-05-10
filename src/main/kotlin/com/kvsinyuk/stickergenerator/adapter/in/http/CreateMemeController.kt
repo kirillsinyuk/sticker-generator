@@ -21,9 +21,9 @@ class CreateMemeController(
 ) {
     @PostMapping(produces = [MediaType.IMAGE_PNG_VALUE])
     fun createMeme(
-	    @RequestParam("file") file: MultipartFile,
-	    @RequestParam("topText") @Size(max = 40) topText: String = "",
-	    @RequestParam("bottomText") @Size(max = 40) bottomText: String = "",
+        @RequestParam("file") file: MultipartFile,
+        @RequestParam("topText") @Size(max = 40) topText: String = "",
+        @RequestParam("bottomText") @Size(max = 40) bottomText: String = "",
     ): ByteArray {
         logger.info { "Creating a meme from image ${file.originalFilename}" }
         val sourceImage = Image(file.bytes, file.originalFilename ?: "source.png")

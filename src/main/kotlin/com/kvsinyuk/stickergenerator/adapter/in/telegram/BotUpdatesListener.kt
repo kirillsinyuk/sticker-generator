@@ -21,14 +21,14 @@ class BotUpdatesListener(
     }
 
     override fun process(updates: MutableList<Update>?): Int {
-	    updates
-		    ?.filter { it.message()?.chat()?.id() != null }
-		    ?.forEach { update ->
-			    val stickerData = telegramUpdateMessageMapper.toMessage(update)
-			    logger.debug("Processing update {}", stickerData)
-			    telegramUpdateHandlers.filter { it.canApply(stickerData) }
-				    .forEach { it.process(stickerData) }
-		    }
+        updates
+            ?.filter { it.message()?.chat()?.id() != null }
+            ?.forEach { update ->
+                val stickerData = telegramUpdateMessageMapper.toMessage(update)
+                logger.debug("Processing update {}", stickerData)
+                telegramUpdateHandlers.filter { it.canApply(stickerData) }
+                    .forEach { it.process(stickerData) }
+            }
         return UpdatesListener.CONFIRMED_UPDATES_ALL
     }
 
