@@ -26,7 +26,7 @@ class TelegramMessageAdapter(
             .let { bot.execute(it) }
     }
 
-    override fun sendDocument(
+    override fun sendPhoto(
         chatId: Long,
         document: ByteArray,
         fileName: String,

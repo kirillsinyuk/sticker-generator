@@ -24,13 +24,18 @@ class RemoveBackgroundAdapter(
         image: BufferedImage,
         originalFilename: String,
     ): BufferedImage {
-        val response = callForBackgroundRemove(image, originalFilename)
-        return response.body?.bytes()
-            ?.toBufferedImage()
-            ?: run {
-                logger.error { response.message }
-                throw RuntimeException(response.message)
+        return callForBackgroundRemove(image, originalFilename).use { response ->
+            if (!response.isSuccessful) {
+                logger.error { "Background removal failed: ${response.code} ${response.message}" }
+                throw RuntimeException("Background removal failed: ${response.code} ${response.message}")
             }
+            response.body?.bytes()
+                ?.toBufferedImage()
+                ?: run {
+                    logger.error { response.message }
+                    throw RuntimeException(response.message)
+                }
+        }
     }
 
     private fun callForBackgroundRemove(

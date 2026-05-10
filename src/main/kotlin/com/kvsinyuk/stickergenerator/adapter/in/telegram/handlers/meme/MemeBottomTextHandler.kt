@@ -21,7 +21,7 @@ class MemeBottomTextHandler(
             addMemeBottomTextUseCase.addBottomText(AddBottomTextCommand(update.chatId, update.message!!))
                 .commandData.getSourceImage()
 
-        telegramMessagePort.sendDocument(update.chatId, resultImage.image, resultImage.fileName)
+        telegramMessagePort.sendPhoto(update.chatId, resultImage.image, resultImage.fileName)
             .also { deleteBotDataPort.delete(update.chatId) }
     }
 

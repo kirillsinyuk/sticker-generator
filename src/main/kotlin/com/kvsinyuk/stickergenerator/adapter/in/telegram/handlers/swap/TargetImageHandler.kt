@@ -26,7 +26,7 @@ class TargetImageHandler(
                 .getAsFaceSwapData()
 
         faceSwapPort.swapFace(update.chatId, botData.faceImage, botData.targetImage)
-            .also { telegramMessagePort.sendDocument(update.chatId, it, botData.targetImage.fileName) }
+            .also { telegramMessagePort.sendPhoto(update.chatId, it, botData.targetImage.fileName) }
             .also { deleteBotDataPort.delete(update.chatId) }
     }
 

@@ -5,6 +5,7 @@ import com.kvsinyuk.stickergenerator.applicaiton.domain.Image
 import com.kvsinyuk.stickergenerator.applicaiton.domain.command.MemeData
 import com.kvsinyuk.stickergenerator.applicaiton.port.`in`.CreateMemeUseCase
 import com.kvsinyuk.stickergenerator.applicaiton.utils.toByteArray
+import jakarta.validation.constraints.Size
 import mu.KLogging
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping
@@ -21,8 +22,8 @@ class CreateMemeController(
     @PostMapping(produces = [MediaType.IMAGE_PNG_VALUE])
     fun createMeme(
         @RequestParam("file") file: MultipartFile,
-        @RequestParam("topText") topText: String = "",
-        @RequestParam("bottomText") bottomText: String = "",
+        @RequestParam("topText") @Size(max = 40) topText: String = "",
+        @RequestParam("bottomText") @Size(max = 40) bottomText: String = "",
     ): ByteArray {
         logger.info { "Creating a meme from image ${file.originalFilename}" }
         val sourceImage = Image(file.bytes, file.originalFilename ?: "source.png")

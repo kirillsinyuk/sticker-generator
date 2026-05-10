@@ -21,7 +21,7 @@ class RemoveBackgroundImageCmdHandler(
         val document = update.document!!
         val resultImage = removeBackgroundUseCase.removeBackground(RemoveBackgroundCommand(update.chatId, document))
         deleteBotDataPort.delete(update.chatId)
-        telegramMessagePort.sendDocument(update.chatId, resultImage.toByteArray(), document.fileName())
+        telegramMessagePort.sendPhoto(update.chatId, resultImage.toByteArray(), document.fileName())
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
