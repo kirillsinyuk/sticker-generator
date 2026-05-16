@@ -27,9 +27,10 @@ class CreateMemeController(
     ): ByteArray {
         logger.info { "Creating a meme from image ${file.originalFilename}" }
         val sourceImage = Image(file.bytes, file.originalFilename ?: "source.png")
-        return createMemeUseCase.createMeme(
-            BotData(1L, MemeData(topText = topText, bottomText = bottomText).also { it.addImage(sourceImage) }),
-        ).toByteArray()
+        return createMemeUseCase
+            .createMeme(
+                BotData(1L, MemeData(topText = topText, bottomText = bottomText).also { it.addImage(sourceImage) }),
+            ).toByteArray()
     }
 
     companion object : KLogging()

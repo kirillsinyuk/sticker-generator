@@ -1,8 +1,7 @@
 spring:
-  data:
-    mongodb:
-      database: stickers
-      uri: ${MONGO_URI}
+  mongodb:
+    database: stickers
+    uri: ${MONGO_URI}
   messages:
     basename: i18n/messages
   servlet:
@@ -22,4 +21,3 @@ bot:
 sticker:
   maxPixelSize: 512
   topPaddingPercent: 15
-

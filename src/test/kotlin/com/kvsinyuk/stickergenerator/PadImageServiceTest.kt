@@ -19,7 +19,9 @@ class PadImageServiceTest {
     fun `should add padding to image when has top text`() {
         // given
         val resourceImage =
-            javaClass.getResource(examplePath).readBytes()
+            javaClass
+                .getResource(examplePath)
+                .readBytes()
                 .toBufferedImage()
 
         // when
@@ -34,7 +36,9 @@ class PadImageServiceTest {
     fun `should not add padding to image with no top text`() {
         // given
         val resourceImage =
-            javaClass.getResource(examplePath).readBytes()
+            javaClass
+                .getResource(examplePath)
+                .readBytes()
                 .toBufferedImage()
 
         // when

@@ -1,8 +1,8 @@
-FROM gradle:8.1.1-jdk17
+FROM gradle:9.1.0-jdk25 AS build
 COPY ./ ./
 RUN gradle build
 
-FROM openjdk:17
+FROM eclipse-temurin:25-jdk
 
 ARG JAR=/build/libs/*.jar
 COPY $JAR sticker-generator.jar

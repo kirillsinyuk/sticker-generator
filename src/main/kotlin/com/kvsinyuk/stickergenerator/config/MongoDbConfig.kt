@@ -8,8 +8,8 @@ import com.mongodb.ConnectionString
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
-import org.springframework.boot.autoconfigure.mongo.MongoProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.boot.mongodb.autoconfigure.MongoProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.convert.ConfigurableTypeInformationMapper
@@ -26,14 +26,14 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext
 class MongoDbConfig(
     private val mongoProperties: MongoProperties,
 ) : AbstractMongoClientConfiguration() {
-    override fun getDatabaseName(): String {
-        return mongoProperties.database
-    }
+    override fun getDatabaseName(): String = requireNotNull(mongoProperties.database) { "spring.data.mongodb.database is required" }
 
     override fun mongoClient(): MongoClient {
-        val connectionString = ConnectionString(mongoProperties.uri)
+        val uri = requireNotNull(mongoProperties.uri) { "spring.data.mongodb.uri is required" }
+        val connectionString = ConnectionString(uri)
         val mongoClientSettings =
-            MongoClientSettings.builder()
+            MongoClientSettings
+                .builder()
                 .applyConnectionString(connectionString)
                 .build()
         return MongoClients.create(mongoClientSettings)

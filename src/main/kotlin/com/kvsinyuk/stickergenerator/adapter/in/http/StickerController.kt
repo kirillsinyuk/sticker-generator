@@ -29,7 +29,8 @@ class StickerController(
             StickerData(topText = topText, bottomText = bottomText)
                 .apply { image = Image(file.bytes, file.originalFilename!!) }
                 .let { BotData(1, it) }
-        return createStickerUseCase.createSticker(image)
+        return createStickerUseCase
+            .createSticker(image)
             .toByteArray()
     }
 

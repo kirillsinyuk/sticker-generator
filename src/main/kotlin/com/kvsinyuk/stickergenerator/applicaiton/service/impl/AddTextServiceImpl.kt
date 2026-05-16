@@ -30,7 +30,8 @@ class AddTextServiceImpl : AddTextService {
         val input =
             ClassPathResource("impact.ttf")
                 .inputStream
-        GraphicsEnvironment.getLocalGraphicsEnvironment()
+        GraphicsEnvironment
+            .getLocalGraphicsEnvironment()
             .registerFont(Font.createFont(Font.TRUETYPE_FONT, input))
     }
 
@@ -39,7 +40,8 @@ class AddTextServiceImpl : AddTextService {
         text: String,
         isTop: Boolean,
     ): BufferedImage {
-        text.takeIf { it.isNotBlank() }
+        text
+            .takeIf { it.isNotBlank() }
             ?.run { drawStringCentered(image.createGraphics(), text, image, isTop) }
         return image
     }
@@ -127,7 +129,8 @@ class AddTextServiceImpl : AddTextService {
 
         // create a glyph vector from text
         val textShape: Shape =
-            graphics.font.createGlyphVector(graphics.fontRenderContext, text)
+            graphics.font
+                .createGlyphVector(graphics.fontRenderContext, text)
                 .getOutline(x.toFloat(), y.toFloat())
 
         graphics.apply {

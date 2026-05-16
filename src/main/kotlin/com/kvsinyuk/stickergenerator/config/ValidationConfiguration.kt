@@ -12,7 +12,9 @@ class ValidationConfiguration {
     fun validationService(validator: Validator) = ValidationService(validator)
 }
 
-class ValidationService(private val validator: Validator) {
+class ValidationService(
+    private val validator: Validator,
+) {
     fun <T> validate(
         entity: T,
         vararg validationGroups: Class<*>,

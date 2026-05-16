@@ -10,45 +10,35 @@ enum class Resizer {
             source: BufferedImage,
             width: Int,
             height: Int,
-        ): BufferedImage {
-            return commonResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR)
-        }
+        ): BufferedImage = commonResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR)
     },
     BILINEAR {
         override fun resize(
             source: BufferedImage,
             width: Int,
             height: Int,
-        ): BufferedImage {
-            return commonResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR)
-        }
+        ): BufferedImage = commonResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR)
     },
     BICUBIC {
         override fun resize(
             source: BufferedImage,
             width: Int,
             height: Int,
-        ): BufferedImage {
-            return commonResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BICUBIC)
-        }
+        ): BufferedImage = commonResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BICUBIC)
     },
     PROGRESSIVE_BILINEAR {
         override fun resize(
             source: BufferedImage,
             width: Int,
             height: Int,
-        ): BufferedImage {
-            return progressiveResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR)
-        }
+        ): BufferedImage = progressiveResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR)
     },
     PROGRESSIVE_BICUBIC {
         override fun resize(
             source: BufferedImage,
             width: Int,
             height: Int,
-        ): BufferedImage {
-            return progressiveResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BICUBIC)
-        }
+        ): BufferedImage = progressiveResize(source, width, height, RenderingHints.VALUE_INTERPOLATION_BICUBIC)
     },
     AVERAGE {
         override fun resize(

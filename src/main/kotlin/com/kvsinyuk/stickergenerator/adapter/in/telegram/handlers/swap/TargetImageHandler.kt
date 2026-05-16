@@ -25,13 +25,15 @@ class TargetImageHandler(
                 .let { addTargetImageUseCase.addImage(it) }
                 .getAsFaceSwapData()
 
-        faceSwapPort.swapFace(update.chatId, botData.faceImage, botData.targetImage)
+        faceSwapPort
+            .swapFace(update.chatId, botData.faceImage, botData.targetImage)
             .also { telegramMessagePort.sendPhoto(update.chatId, it, botData.targetImage.fileName) }
             .also { deleteBotDataPort.delete(update.chatId) }
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.takeIf { it.document != null }
+        update
+            .takeIf { it.document != null }
             ?.let { findBotDataPort.findByChatId(update.chatId)?.isFaceSwapDataWithSourceFile() == true }
             ?: false
 }

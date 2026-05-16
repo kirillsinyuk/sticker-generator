@@ -26,7 +26,8 @@ class BotUpdatesListener(
             ?.forEach { update ->
                 val stickerData = telegramUpdateMessageMapper.toMessage(update)
                 logger.debug("Processing update {}", stickerData)
-                telegramUpdateHandlers.filter { it.canApply(stickerData) }
+                telegramUpdateHandlers
+                    .filter { it.canApply(stickerData) }
                     .forEach { it.process(stickerData) }
             }
         return UpdatesListener.CONFIRMED_UPDATES_ALL

@@ -1,7 +1,6 @@
 spring:
-  data:
-    mongodb:
-      uri: mongodb://root:example@localhost:27017/stickers
+  mongodb:
+    uri: mongodb://root:example@localhost:27017/stickers
 
 http:
   bg-removal:
@@ -11,5 +10,3 @@ http:
 
 bot:
   token: 123testToken
-
-
