@@ -12,7 +12,5 @@ interface SaveStickerDataUseCase {
 class SaveStickerDataUseCaseImpl(
     private val saveBotDataPort: SaveBotDataPort,
 ) : SaveStickerDataUseCase {
-    override fun save(data: BotData): BotData {
-        return saveBotDataPort.save(data)
-    }
+    override fun save(data: BotData): BotData = saveBotDataPort.save(data)
 }

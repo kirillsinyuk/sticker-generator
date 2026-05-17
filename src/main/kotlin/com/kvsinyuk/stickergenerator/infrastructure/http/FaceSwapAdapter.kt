@@ -1,6 +1,5 @@
 package com.kvsinyuk.stickergenerator.infrastructure.http
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.kvsinyuk.stickergenerator.applicaiton.domain.Image
 import com.kvsinyuk.stickergenerator.applicaiton.port.out.http.FaceSwapPort
 import com.kvsinyuk.stickergenerator.infrastructure.http.request.FaceSwapRequest
@@ -14,13 +13,14 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import tools.jackson.databind.json.JsonMapper
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 @Component
 class FaceSwapAdapter(
     private val client: OkHttpClient,
-    private val objectMapper: ObjectMapper,
+    private val jsonMapper: JsonMapper,
 ) : FaceSwapPort {
     @Value("\${http.face-swap.base-url}")
     private lateinit var faceSwapBaseUrl: String
@@ -30,19 +30,19 @@ class FaceSwapAdapter(
         chatId: Long,
         sourceImage: Image,
         targetImage: Image,
-    ): ByteArray {
-        return callForFaceSwap(chatId, sourceImage, targetImage).use { response ->
+    ): ByteArray =
+        callForFaceSwap(chatId, sourceImage, targetImage).use { response ->
             if (!response.isSuccessful) {
                 val body = response.body?.string().orEmpty()
                 logger.error { "Face swap failed: ${response.code} $body" }
                 throw RuntimeException("Face swap failed: ${response.code}")
             }
             Base64.decode(
-                objectMapper.readValue(response.body!!.charStream(), FaceSwapResponse::class.java)
+                jsonMapper
+                    .readValue(response.body!!.charStream(), FaceSwapResponse::class.java)
                     .output,
             )
         }
-    }
 
     @OptIn(ExperimentalEncodingApi::class)
     private fun callForFaceSwap(
@@ -51,22 +51,24 @@ class FaceSwapAdapter(
         targetImage: Image,
     ): Response {
         val request: Request =
-            Request.Builder()
+            Request
+                .Builder()
                 .url("$faceSwapBaseUrl/")
                 .post(
-                    objectMapper.writeValueAsString(
-                        FaceSwapRequest(
-                            Base64.encode(sourceImage.image),
-                            Base64.encode(targetImage.image),
-                            chatId.toString(),
-                            sourceImage.fileName,
-                            targetImage.fileName,
-                        ),
-                    ).toRequestBody(JSON),
-                )
-                .build()
+                    jsonMapper
+                        .writeValueAsString(
+                            FaceSwapRequest(
+                                Base64.encode(sourceImage.image),
+                                Base64.encode(targetImage.image),
+                                chatId.toString(),
+                                sourceImage.fileName,
+                                targetImage.fileName,
+                            ),
+                        ).toRequestBody(JSON),
+                ).build()
 
-        return client.newCall(request)
+        return client
+            .newCall(request)
             .execute()
     }
 

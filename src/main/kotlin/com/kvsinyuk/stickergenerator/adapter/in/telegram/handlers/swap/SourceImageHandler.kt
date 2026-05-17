@@ -22,7 +22,8 @@ class SourceImageHandler(
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.takeIf { it.document != null }
+        update
+            .takeIf { it.document != null }
             ?.let { findBotDataPort.findByChatId(update.chatId)?.isFaceSwapDataInit() == true }
             ?: false
 }

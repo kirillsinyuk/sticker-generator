@@ -23,17 +23,18 @@ class AddBottomTextUseCaseImpl(
     private val addTextService: AddTextService,
     private val saveBotDataPort: SaveBotDataPort,
 ) : AddBottomTextUseCase {
-    override fun addBottomText(command: AddBottomTextUseCase.AddBottomTextCommand): BotData {
-        return getBotDataPort.getByChatId(command.chatId)
+    override fun addBottomText(command: AddBottomTextUseCase.AddBottomTextCommand): BotData =
+        getBotDataPort
+            .getByChatId(command.chatId)
             .addText(command.message, false)
             .let { drawTextOnImage(it) }
             .let { saveBotDataPort.save(it) }
-    }
 
     private fun drawTextOnImage(data: BotData): BotData {
         val image = data.commandData.getSourceImage()
         val result =
-            addTextService.addText(image.image.toBufferedImage(), data.getTopText(), false)
+            addTextService
+                .addText(image.image.toBufferedImage(), data.getTopText(), false)
                 .toByteArray()
         return data.setImage(image.copy(image = result))
     }

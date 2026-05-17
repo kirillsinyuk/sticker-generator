@@ -12,7 +12,5 @@ interface MessageSourcePort {
 class MessageSourcePortImpl(
     private val messageSource: MessageSource,
 ) : MessageSourcePort {
-    override fun getMessage(code: String): String {
-        return messageSource.getMessage(code, null, Locale.ENGLISH)
-    }
+    override fun getMessage(code: String): String = messageSource.getMessage(code, null, Locale.ENGLISH)
 }

@@ -18,15 +18,19 @@ class MemeBottomTextHandler(
 ) : TelegramUpdateHandler {
     override fun process(update: TelegramUpdateMessage) {
         val resultImage =
-            addMemeBottomTextUseCase.addBottomText(AddBottomTextCommand(update.chatId, update.message!!))
-                .commandData.getSourceImage()
+            addMemeBottomTextUseCase
+                .addBottomText(AddBottomTextCommand(update.chatId, update.message!!))
+                .commandData
+                .getSourceImage()
 
-        telegramMessagePort.sendPhoto(update.chatId, resultImage.image, resultImage.fileName)
+        telegramMessagePort
+            .sendPhoto(update.chatId, resultImage.image, resultImage.fileName)
             .also { deleteBotDataPort.delete(update.chatId) }
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.takeIf { !it.message.isNullOrBlank() }
+        update
+            .takeIf { !it.message.isNullOrBlank() }
             ?.let { findBotDataPort.findByChatId(it.chatId)?.isMemeDataWithTopText() == true }
             ?: false
 }

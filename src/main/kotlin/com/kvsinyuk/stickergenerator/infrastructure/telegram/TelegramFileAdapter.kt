@@ -13,7 +13,9 @@ class TelegramFileAdapter(
     override fun getFileContent(fileId: String): Image {
         val file = bot.execute(GetFile(fileId))
         val fileName =
-            file.file().filePath()
+            file
+                .file()
+                .filePath()
                 .replaceBeforeLast("/", "")
                 .replace("/", "")
         return Image(bot.getFileContent(file.file()), fileName)

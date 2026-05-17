@@ -23,7 +23,8 @@ class CropImageServiceTest {
     fun `should crop image`() {
         // given
         val resourceImage =
-            javaClass.getResource(examplePath)
+            javaClass
+                .getResource(examplePath)
                 .let { Image(it.readBytes(), it.file) }
         val botData =
             BotData(
@@ -33,7 +34,13 @@ class CropImageServiceTest {
             )
 
         // when
-        val croppedImage = cropImageService.cropImage(botData.getAsStickerData().image.image.toBufferedImage())
+        val croppedImage =
+            cropImageService.cropImage(
+                botData
+                    .getAsStickerData()
+                    .image.image
+                    .toBufferedImage(),
+            )
 
         // then
         assert(croppedImage.height < resourceImage.image.toBufferedImage().height)

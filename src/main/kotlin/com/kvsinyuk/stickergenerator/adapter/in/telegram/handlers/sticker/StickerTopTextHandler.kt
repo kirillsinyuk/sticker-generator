@@ -22,7 +22,8 @@ class StickerTopTextHandler(
     }
 
     override fun canApply(update: TelegramUpdateMessage) =
-        update.takeIf { !it.message.isNullOrBlank() }
+        update
+            .takeIf { !it.message.isNullOrBlank() }
             ?.let { findBotDataPort.findByChatId(update.chatId)?.isStickerDataWithSourceFile() == true }
             ?: false
 }

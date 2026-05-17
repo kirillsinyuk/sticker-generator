@@ -16,7 +16,5 @@ data class Image(
         return true
     }
 
-    override fun hashCode(): Int {
-        return fileName.hashCode() + image.size
-    }
+    override fun hashCode(): Int = fileName.hashCode() + image.size
 }

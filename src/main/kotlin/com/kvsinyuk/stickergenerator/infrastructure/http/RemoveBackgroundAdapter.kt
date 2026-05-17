@@ -23,41 +23,42 @@ class RemoveBackgroundAdapter(
     override fun removeBackground(
         image: BufferedImage,
         originalFilename: String,
-    ): BufferedImage {
-        return callForBackgroundRemove(image, originalFilename).use { response ->
+    ): BufferedImage =
+        callForBackgroundRemove(image, originalFilename).use { response ->
             if (!response.isSuccessful) {
                 logger.error { "Background removal failed: ${response.code} ${response.message}" }
                 throw RuntimeException("Background removal failed: ${response.code} ${response.message}")
             }
-            response.body?.bytes()
+            response.body
+                ?.bytes()
                 ?.toBufferedImage()
                 ?: run {
                     logger.error { response.message }
                     throw RuntimeException(response.message)
                 }
         }
-    }
 
     private fun callForBackgroundRemove(
         image: BufferedImage,
         originalFilename: String,
     ): Response {
         val request: Request =
-            Request.Builder()
+            Request
+                .Builder()
                 .url("$backgroundRemoveBaseUrl/api/remove")
                 .post(
-                    MultipartBody.Builder()
+                    MultipartBody
+                        .Builder()
                         .setType(MultipartBody.FORM)
                         .addFormDataPart(
                             "file",
                             originalFilename,
                             image.toByteArray().toRequestBody(),
-                        )
-                        .build(),
-                )
-                .build()
+                        ).build(),
+                ).build()
 
-        return client.newCall(request)
+        return client
+            .newCall(request)
             .execute()
     }
 

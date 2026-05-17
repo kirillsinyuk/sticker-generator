@@ -15,7 +15,8 @@ abstract class AddTopTextUseCase(
     private val saveBotDataPort: SaveBotDataPort,
 ) {
     open fun addTopText(command: AddTopTextCommand) =
-        getBotDataPort.getByChatId(command.chatId)
+        getBotDataPort
+            .getByChatId(command.chatId)
             .addText(command.message, true)
             .let { drawTextOnImage(it) }
             .let { saveBotDataPort.save(it) }
@@ -38,7 +39,8 @@ class AddTopTextUseCaseImpl(
     override fun drawTextOnImage(data: BotData): BotData {
         val image = data.commandData.getSourceImage()
         val result =
-            addTextService.addText(image.image.toBufferedImage(), data.getTopText(), true)
+            addTextService
+                .addText(image.image.toBufferedImage(), data.getTopText(), true)
                 .toByteArray()
         return data.setImage(image.copy(image = result))
     }
@@ -54,7 +56,8 @@ class AddTopTextWithPaddingUseCaseImpl(
     override fun drawTextOnImage(data: BotData): BotData {
         val image = data.commandData.getSourceImage()
         val result =
-            padImageService.addPaddingIfNecessary(image.image.toBufferedImage(), data.getTopText().isNotBlank())
+            padImageService
+                .addPaddingIfNecessary(image.image.toBufferedImage(), data.getTopText().isNotBlank())
                 .let { addTextService.addText(it, data.getTopText(), true) }
                 .toByteArray()
         return data.setImage(image.copy(image = result))

@@ -16,18 +16,23 @@ data class BotData(
     val chatId: Long,
     val commandData: CommandData,
 ) {
-    fun getTopText(): String {
-        return when (commandData) {
+    fun getTopText(): String =
+        when (commandData) {
             is MemeData -> commandData.topText
             is StickerData -> commandData.topText
             else -> ""
         }
-    }
 
     fun setImage(image: Image): BotData {
         when (commandData) {
-            is MemeData -> commandData.image = image
-            is StickerData -> commandData.image = image
+            is MemeData -> {
+                commandData.image = image
+            }
+
+            is StickerData -> {
+                commandData.image = image
+            }
+
             else -> {}
         }
         return this
@@ -38,8 +43,14 @@ data class BotData(
         isTop: Boolean = false,
     ): BotData {
         when (commandData) {
-            is MemeData -> commandData.addText(text, isTop)
-            is StickerData -> commandData.addText(text, isTop)
+            is MemeData -> {
+                commandData.addText(text, isTop)
+            }
+
+            is StickerData -> {
+                commandData.addText(text, isTop)
+            }
+
             else -> {}
         }
         return this
@@ -47,9 +58,18 @@ data class BotData(
 
     fun addImage(image: Image): BotData {
         when (commandData) {
-            is MemeData -> commandData.addImage(image)
-            is StickerData -> commandData.addImage(image)
-            is FaceSwapData -> commandData.addImage(image)
+            is MemeData -> {
+                commandData.addImage(image)
+            }
+
+            is StickerData -> {
+                commandData.addImage(image)
+            }
+
+            is FaceSwapData -> {
+                commandData.addImage(image)
+            }
+
             else -> {}
         }
         return this

@@ -25,6 +25,7 @@ data class FaceSwapData(
                 targetImage = image
                 status = FaceSwapStatus.TARGET_FILE_ADDED
             }
+
             else -> {}
         }
     }

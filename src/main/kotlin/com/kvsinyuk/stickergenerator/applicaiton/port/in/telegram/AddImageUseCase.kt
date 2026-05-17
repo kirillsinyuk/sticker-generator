@@ -22,7 +22,8 @@ abstract class AddImageUseCase(
         @Valid command: AddImageCommand,
     ): BotData {
         val image = telegramFilePort.getFileContent(command.fileId)
-        return getBotDataPort.getByChatId(command.chatId)
+        return getBotDataPort
+            .getByChatId(command.chatId)
             .let { setImage(it, image) }
             .let { saveBotDataPort.save(it) }
     }
@@ -30,9 +31,7 @@ abstract class AddImageUseCase(
     open fun setImage(
         data: BotData,
         image: Image,
-    ): BotData {
-        return data.addImage(image)
-    }
+    ): BotData = data.addImage(image)
 
     data class AddImageCommand(
         val chatId: Long,
@@ -62,7 +61,8 @@ class AddImageWithResizeUseCaseImpl(
         image: Image,
     ): BotData {
         val resizedImage =
-            resizeImageService.resizeBufferedImage(image.image.toBufferedImage())
+            resizeImageService
+                .resizeBufferedImage(image.image.toBufferedImage())
                 .let { image.copy(image = it.toByteArray()) }
         return data.addImage(resizedImage)
     }
